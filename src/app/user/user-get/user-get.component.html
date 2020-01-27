@@ -1,0 +1,36 @@
+<br />
+<h2> {{ title }}</h2>
+<br />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data de Criacao</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.fullName }}</td>
+            <td>{{ user.creationDate | date }}</td>
+            <td>
+                <button class="btn btn-info" type="button">
+                    Editar
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-danger" type="button">
+                    Remover
+                 </button>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
