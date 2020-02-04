@@ -11,14 +11,14 @@
             <form [formGroup]="form">
                 <div class=" form-group ">
                     <label for="username ">Username</label>
-                    <input type="number " id="username " class="form-control" formControlName="username" required/>
+                    <input type="number" id="username " class="form-control" formControlName="username" required/>
                 </div>
                 <div class="form-group ">
-                    <label for="password ">Password</label>
-                    <input type="password " id="password" class="form-control" formControlName="password" required/>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password" required/>
                 </div>
                 <div>
-                    <button class="btn btn-primary btn-lg btn-block" (click)="login()">Entrar</button>
+                    <button class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid" (click)="login()">Entrar</button>
                 </div>
             </form>
         </div>

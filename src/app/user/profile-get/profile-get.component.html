@@ -1,32 +1,26 @@
 <br />
 <h2> {{ title }}</h2>
 <br />
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col"> Descricao</th>
+                <th scope="col">Data de Criacao</th>
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Data de Criacao</th>
-            <th scope="col"> </th>
-            <th scope="col"> </th>
-        </tr>
-    </thead>
-    <tbody>
 
-        <tr *ngFor="let profile of profiles">
-            <td>{{ profile.name }}</td>
-            <td>{{ profile.creationDate | date }}</td>
-            <td>
-                <button class="btn btn-info" type="button">
-                    Editar
-                </button>
-            </td>
-            <td>
-                <button class="btn btn-danger" type="button">
-                    Remover
-                 </button>
-            </td>
+            </tr>
+        </thead>
+        <tbody>
 
-        </tr>
-    </tbody>
-</table>
+            <tr *ngFor="let profile of profiles">
+                <td>{{ profile.name }}</td>
+                <td>{{ profile.description }} </td>
+                <td>{{ profile.creationDate | date }}</td>
+
+
+            </tr>
+        </tbody>
+    </table>
+</div>

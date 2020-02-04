@@ -1,6 +1,6 @@
-export  class GenericEntity{
+export  class GenericEntity {
 
-    id: number ; 
+    id: number;
     creationDate: Date;
     createdBy: number;
     updateDate: Date;

@@ -1,11 +1,11 @@
 <br />
 <h2> {{ title }}</h2>
 <br />
-
 <div class="container">
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Saldo</th>
                 <th scope="col">Username</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Data de Criacao</th>
@@ -17,19 +17,15 @@
         </thead>
         <tbody>
 
-            <tr *ngFor="let user of users">
-                <td>{{ user.username }}</td>
-                <td>{{ user.fullName }}</td>
-                <td>{{ user.creationDate | date }}</td>
+            <tr *ngFor="let account of accounts">
+                <td>{{ account.balance | currency:'MZN' }}</td>
+                <td>{{ account.user.username }}</td>
+                <td>{{ account.user.fullName }}</td>
+                <td>{{ account.user.creationDate | date }}</td>
                 <td>
-                    <button class="btn btn-info" type="button" (click)="redirectToUpdate( user.username )">
-                    Editar
+                    <button class="btn btn-info" type="button" (click)="openUpdateModal( account )">
+                    Actualizar Saldo
                 </button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" type="button" (click)="openDeleteModel( user.username )">
-                    Remover
-                 </button>
                 </td>
 
             </tr>

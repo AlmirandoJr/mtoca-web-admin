@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserEntity} from '../user.entity';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DeleteUserModalComponent } from '../delete-user-modal/delete-user-modal.component';
 
 
 @Component({
@@ -16,7 +18,9 @@ export class UserGetComponent implements OnInit {
   users: UserEntity[];
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private matDialog: MatDialog) { }
 
   ngOnInit() {
     this.userService.getActiveUsers()
@@ -24,5 +28,21 @@ export class UserGetComponent implements OnInit {
       this.users = u; },
         error => { console.log( error.message );
       });
+  }
+
+  redirectToUpdate( user: string ) {
+    this.router.navigate(['/updateUser'], {queryParams: {username: user}});
+  }
+
+
+  openDeleteModel(username) {
+    const  matDialogConf = new  MatDialogConfig();
+    matDialogConf.disableClose = true;
+    matDialogConf.height = '350px';
+    matDialogConf.width = '600px';
+    matDialogConf.data = username;
+    matDialogConf.id = 'deleteuser:' + username;
+
+    this.matDialog.open(DeleteUserModalComponent, matDialogConf);
   }
 }

@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, first } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { map, first, catchError, isEmpty } from 'rxjs/operators';
 
 import { UserEntity } from '../user/user.entity';
-import { Observable } from 'rxjs';
+import { Observable, of, empty } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  username: string;
+  password: string;
   userUrl = 'http://localhost:8080/user/findByUsername';
   authenticated = false;
 
-  username: string;
 
-  password: string;
+  error: Error;
 
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): boolean {
+  login(username: string, password: string) {
+
 
     this.username = username;
     this.password = password;
 
-    const base64Token = 'Basic ' + btoa(username + ':' + password);
+
+    const token = btoa(username + ':' + password);
+    const base64Token = 'Basic ' + token;
 
     const httpOptions = {
       headers: new  HttpHeaders({
@@ -34,30 +37,26 @@ export class AuthenticationService {
       })
     };
 
-    this.http.get<UserEntity>(`${this.userUrl}/${username}`, httpOptions);
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('token', base64Token);
+    return this.http.get<UserEntity>(`${this.userUrl}/${username}`, httpOptions)
+        .pipe( map (x => {
+          sessionStorage.setItem('username', username);
+          this.username = username;
+          this.password = password;
+        })  );
 
-
-    if ( base64Token.length > 29) {
-      this.authenticated = true;
-    }
-
-    return this.authenticated;
   }
 
   isLoggenIn() {
-    if ( this.authenticated ) {
-      return true;
+    if ( sessionStorage.getItem('username')  === null ) {
+     return false;
     }
-    return false;
+    return true;
   }
 
   logout() {
     sessionStorage.removeItem('username');
-    sessionStorage.removeItem('token');
-
-    this.authenticated = false;
+    this.username = null;
+    this.password = null;
   }
 
 }

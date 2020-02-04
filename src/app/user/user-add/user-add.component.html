@@ -1,8 +1,11 @@
 <br />
 <h2> {{ title }}</h2>
 <br />
-<div *ngIf="matchPasswordsInput" class="alert alert-danger" role="alert">
+<div *ngIf="passNotMatching" class="alert alert-danger" role="alert">
     As passwords devem ser iguais
+</div>
+<div *ngIf="createSucessfulCreated" class="alert alert-success" role="alert">
+    Utilizador criado com sucesso
 </div>
 <div class=" col-lg-6">
 
@@ -15,27 +18,28 @@
         </div>
         <div class="form-group">
             <label for="fullName">Nome Completo</label>
-            <input formControlName="fullname" type="text" class="form-control" id="fullName">
+            <input formControlName="fullName" type="text" class="form-control" id="fullName" required>
         </div>
         <div class=" form-group">
             <label for="password1 ">Password</label>
-            <input formControlName="password1" type="password " class="form-control " id="password1">
+            <input formControlName="password1" type="password" class="form-control " id="password1" required>
         </div>
         <div class="form-group">
             <label for="password2 ">Repita a password</label>
-            <input formControlName="password2" type="password " class="form-control " id="password2">
+            <input formControlName="password2" type="password" class="form-control " id="password2" required>
 
         </div>
-
+        <!--
         <div class="form-group">
             <label for="profileId ">Perfil</label>
             <select class="form-control " id="profileId" formControlName="profileControlName">
             <option> --Selecione perfil-- </option>
             <option  *ngFor="let profile of profiles" [ngValue]="profile">{{ profile.description }}</option>
         </select>
-
         </div>
+        -->
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
     </form>
 </div>

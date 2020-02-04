@@ -8,8 +8,6 @@ import { AuthenticationService } from './authentication.service';
 })
 export class HttpinterceptorService implements HttpInterceptor {
 
-
-
   constructor(private authenticationService: AuthenticationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
