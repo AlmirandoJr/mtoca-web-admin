@@ -1,14 +1,38 @@
 <br />
-<h2> {{ title }}</h2>
+
 <br />
 
 <div class="container">
+    <div *ngIf="passNotMatching" class="alert alert-danger" role="alert">
+        As passwords devem ser iguais
+    </div>
+    <div *ngIf="sucessfulCreation" class="alert alert-success" role="alert">
+       {{ sucessfulCreationMessage }}
+    </div>
+    <div *ngIf="sucessfulUpdate" class="alert alert-success" role="alert">
+        {{ sucessfulUpdateMessage }}
+    </div>
+    <h2> {{ title }}</h2>
+    <br />
+
+    <br />
+    <button class="btn btn-primary" type="button" (click)="openCreateUser()">
+        Novo Utilizador
+     </button>
+
+     <br />
+
+     <br />
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Username</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Data de Criacao</th>
+                <th scope="col">Data de Nascimento</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Perfile</th>
                 <th scope="col"> </th>
                 <th scope="col"> </th>
 
@@ -19,10 +43,16 @@
 
             <tr *ngFor="let user of users">
                 <td>{{ user.username }}</td>
-                <td>{{ user.fullName }}</td>
+                <td>{{ user.name }}</td>
                 <td>{{ user.creationDate | date }}</td>
+                <td>{{ user.birthDate | date }}</td>
+                <td>{{ user.city  }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.profile.name }}</td>
+
+
                 <td>
-                    <button class="btn btn-info" type="button" (click)="redirectToUpdate( user.username )">
+                    <button class="btn btn-info" type="button" (click)="openUpdateUser( user )">
                     Editar
                 </button>
                 </td>

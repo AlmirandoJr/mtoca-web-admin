@@ -9,10 +9,10 @@ import { catchError } from 'rxjs/operators';
 export class AccountService {
 
 
-  private findAllActiveUrl = 'http://localhost:8080/account/findAllActive';
+  private findAllActiveUrl = 'http://localhost:9090/accounts';
 
 
-  private updateAccountUrl = 'http://localhost:8080/account/updateAccount';
+  private updateAccountUrl = 'http://localhost:9090/accounts';
 
   constructor(private httpClient: HttpClient) { }
 

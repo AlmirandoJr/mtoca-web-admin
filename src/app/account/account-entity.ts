@@ -9,5 +9,6 @@ export class AccountEntity extends GenericEntity {
 
     balance: number;
     user: UserEntity;
+    code: string;
 
 }

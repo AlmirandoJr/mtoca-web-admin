@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '../user.service';
 import { ProfileService } from '../profile.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ProfileEntity } from '../profile.entity';
 import { UserEntity } from '../user.entity';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserGetComponent } from '../user-get/user-get.component';
 
 @Component({
   selector: 'app-user-update',
@@ -14,51 +16,59 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UserUpdateComponent implements OnInit {
 
 
-  profile: ProfileEntity = null;
-  success = false;
-  sucessMessage = 'Utilizador actualizado com sucesso';
+  profile: ProfileEntity =  this.data.profile;
+  success: boolean = false;
+  failture: boolean = false;
+  sucessMessage: string = 'Utilizador actualizado com sucesso';
+  failtureFailture: string = 'Erro ao actualizar utilizador';
+  title :string = 'Actualizar  utilizador';
+
   profiles: ProfileEntity [] = [];
-  usernameQueryStringParam: string = null;
   userMtoca: UserEntity = null;
   form = this.formBuilder.group({
-    username: [''],
-    fullName:   [''],
-    profile: ['']
+    username: this.data.username,
+    name:   this.data.name,
+    city: this.data.city,
+    gender: this.data.gender,
+    birthDate: this.data.birthDate,
+    profile: this.data.profile.name
+
   });
 
-
-
-  constructor(private userService: UserService, private profileService: ProfileService,
-              private  formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor( 
+    public dialogRef: MatDialogRef<UserUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: UserEntity,
+    private userService: UserService,
+    private profileService: ProfileService,
+    private  formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // retrive param from query string
-    this.activatedRoute.queryParams
-        .subscribe(x => {this.usernameQueryStringParam = x.username; });
-
-    // get the username and set the fecthed user to the form
-    this.userService.findUserByUSername(this.usernameQueryStringParam)
-      .subscribe(x => { this.userMtoca = x;
-                        this.form.setValue ({username: this.userMtoca.username,
-                                             fullName: this.userMtoca.fullName,
-                                             profile: null}); },
-               e => {console.error(e.message); } ) ;
-
+    
+      this.userMtoca =  this.data;
 
     this.profileService.getProfiles().subscribe(data => { this.profiles = data; },
-      e => {console.error(e); } );
+      e => {console.error(e); } ); 
+
   }
 
   updateUser() {
 
     this.userMtoca.username = this.form.controls.username.value;
-    this.userMtoca.fullName = this.form.controls.fullName.value;
-    const  profileC: ProfileEntity = this.form.get('profile').value;
+    this.userMtoca.name = this.form.controls.name.value;
+    this.userMtoca.birthDate = this.form.controls.birthDate.value;
+    this.userMtoca.city =  this.form.controls.city.value;
+    this.userMtoca.gender = this.form.controls.gender.value;
 
-    this.userService.updateUser(this.userMtoca, profileC)
-      .subscribe(x => { this.success = true;
+    const selectedProfileName :string = this.form.controls.profile.value;
+
+ 
+
+    this.userService.updateUser(this.userMtoca,selectedProfileName)
+      .subscribe(x => {  this.success = true;
+                         this.failture = false;
                         this.form.reset(); },
-                 e => { console.error(e.message); });
+                 e => { console.error(e.message);
+                        this.failture = true; });
   }
 
 }

@@ -10,24 +10,26 @@ import { Router } from '@angular/router';
 })
 export class DeleteUserModalComponent implements OnInit {
 
+  success: boolean = false;
+  failture: boolean = false;
+  sucessMessage: string = 'Utilizador removido com sucesso';
+  failtureFailture: string = 'Erro ao remover utilizador';
+
   constructor(public dialogRef: MatDialogRef<DeleteUserModalComponent> ,
               @Inject(MAT_DIALOG_DATA) public data: string,
-              private userService: UserService,
-              private router: Router) {
+              private userService: UserService) {
    }
 
   ngOnInit() {
   }
 
-  confirm() {
-    console.log(this.data);
+  confirm(event) {
+    
     this.userService.inactivateUser(this.data)
-    .subscribe(x => {this.dialogRef.close();
-                     this.router.navigate(['/allusers']);
-                     location.reload();
-
-                      },
-      e => {console.log(e); });
+    .subscribe(x => { event.target.disabled= true;
+                      this.success=true;
+                      this.failture=false},
+      x => {this.failture=true });
   }
 
   dontConfirm() {

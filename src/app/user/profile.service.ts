@@ -2,28 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProfileEntity } from './profile.entity';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  profileList = 'http://localhost:8080/profile';
+  profileUrl = 'http://localhost:9090/profiles';
 
   constructor(private httpClient: HttpClient) { }
 
   getProfiles(): Observable<any> {
 
-  /*const httpOptons = {
+  const httpOptons = {
     headers : new  HttpHeaders ({
       'Content-type': 'application/json',
       Authorization: sessionStorage.getItem('token')
     })
-  };*/
-  return this.httpClient.get(`${this.profileList}`);
+  };
+  return this.httpClient.get(`${this.profileUrl}`);
   }
 
   getProfileByName(name: string): Observable<any> {
-    return this.httpClient.get('http://localhost:8080/profile/findByName/' + name);
+
+    return this.httpClient.get(`${this.profileUrl}/${name}`);
   }
 }

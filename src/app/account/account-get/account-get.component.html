@@ -1,31 +1,38 @@
 <br />
-<h2> {{ title }}</h2>
+
 <br />
 <div class="container">
+    <h2> {{ title }}</h2>
     <table class="table">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Codigo</th>
                 <th scope="col">Saldo</th>
                 <th scope="col">Username</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Data de Criacao</th>
                 <th scope="col"> </th>
                 <th scope="col"> </th>
-
-
             </tr>
         </thead>
         <tbody>
 
             <tr *ngFor="let account of accounts">
+                <td>{{ account.code }}</td>
                 <td>{{ account.balance | currency:'MZN' }}</td>
                 <td>{{ account.user.username }}</td>
-                <td>{{ account.user.fullName }}</td>
+                <td>{{ account.user.name }}</td>
                 <td>{{ account.user.creationDate | date }}</td>
                 <td>
                     <button class="btn btn-info" type="button" (click)="openUpdateModal( account )">
                     Actualizar Saldo
                 </button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info" type="button" (click)="showAccountStatement( account.user.username )">
+                        Extracto da Conta
+                    </button>
                 </td>
 
             </tr>

@@ -1,0 +1,20 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Data</th>
+            <th scope="col">Descricao</th>
+            <th scope="col">Saldo </th>
+            <th scope="col">Valor </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let accountStatement of accountStatements">
+            <td>{{ accountStatement.code }}</td>
+            <td>{{ accountStatement.occourenceDate | date: 'dd-MM-yyyy hh:mm:ss' }}</td>
+            <td>{{ accountStatement.description }}</td>
+            <td>{{ accountStatement.balance | currency: 'MZN' }}</td>
+            <td>{{ accountStatement.value | currency: 'MZN' }}</td>
+        </tr>
+    </tbody>
+</table>

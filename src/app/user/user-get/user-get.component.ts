@@ -4,6 +4,8 @@ import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeleteUserModalComponent } from '../delete-user-modal/delete-user-modal.component';
+import { UserAddComponent } from '../user-add/user-add.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 
 
 @Component({
@@ -14,6 +16,13 @@ import { DeleteUserModalComponent } from '../delete-user-modal/delete-user-modal
 export class UserGetComponent implements OnInit {
 
   title = 'Utilizadores Cadastrados';
+  sucessfulCreation= false;
+  sucessfulCreationMessage= 'Utilizador criado com sucesso';
+  sucessfulUpdate = false;
+  sucessfulUpdateMessage = 'Utilizador actualizado com sucesso';;
+
+
+
 
   users: UserEntity[];
 
@@ -30,9 +39,9 @@ export class UserGetComponent implements OnInit {
       });
   }
 
-  redirectToUpdate( user: string ) {
+  /**redirectToUpdate( user: string ) {
     this.router.navigate(['/updateUser'], {queryParams: {username: user}});
-  }
+  }*/
 
 
   openDeleteModel(username) {
@@ -43,6 +52,34 @@ export class UserGetComponent implements OnInit {
     matDialogConf.data = username;
     matDialogConf.id = 'deleteuser:' + username;
 
-    this.matDialog.open(DeleteUserModalComponent, matDialogConf);
+    const dialog = this.matDialog.open(DeleteUserModalComponent, matDialogConf);
+    dialog.afterClosed().subscribe(x=>{ this.ngOnInit()});
+  }
+
+  openCreateUser(){
+    const matDialogConf = new  MatDialogConfig();
+    matDialogConf.disableClose = false;
+    matDialogConf.height = '550px';
+    matDialogConf.width = '800px';
+    matDialogConf.id = 'createuser';
+
+    const  dialog = this.matDialog.open(UserAddComponent, matDialogConf);
+    dialog.afterClosed().subscribe(x=>{ this.ngOnInit()});
+
+
+  }
+
+  openUpdateUser(user: UserEntity){
+    const matDialogConf = new  MatDialogConfig();
+    matDialogConf.disableClose = false;
+    matDialogConf.height = '550px';
+    matDialogConf.width = '800px';
+    matDialogConf.id = 'UpdateUser';
+    matDialogConf.data = user;
+
+   const dialog=  this.matDialog.open(UserUpdateComponent, matDialogConf);
+
+    dialog.afterClosed().subscribe(x=>{ this.ngOnInit()});
+
   }
 }

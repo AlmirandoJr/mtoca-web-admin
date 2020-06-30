@@ -3,6 +3,9 @@ import { AccountService } from '../account.service';
 import { AccountEntity } from '../account-entity';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateAccountModalComponent } from '../update-account-modal/update-account-modal.component';
+import { AccountStatementService } from '../account-statement.service';
+import { AccountStatementEntity } from '../AccountStatementEntity';
+import { AccountStatementComponent } from '../account-statement/account-statement.component';
 
 @Component({
   selector: 'app-account-get',
@@ -15,7 +18,8 @@ export class AccountGetComponent implements OnInit {
 
   accounts: AccountEntity [] = [];
   constructor(private accountService: AccountService,
-              private matDiaglog: MatDialog) { }
+              private matDiaglog: MatDialog,
+              private accountStatementService: AccountStatementService) { }
 
   ngOnInit() {
     this.accountService.findAllActive()
@@ -32,7 +36,22 @@ export class AccountGetComponent implements OnInit {
     matDialogConf.id = accountId + 'account';
     matDialogConf.disableClose = true;
 
-    this.matDiaglog.open(UpdateAccountModalComponent, matDialogConf);
+    const dialog = this.matDiaglog.open(UpdateAccountModalComponent, matDialogConf);
+    dialog.afterClosed().subscribe(x=>{this.ngOnInit();})
+
+  }
+
+  showAccountStatement(username: string) {
+
+
+    this.accountStatementService.findAccountStatementByUsername(username);
+    const matDiaglogConf = new MatDialogConfig();
+    matDiaglogConf.width = '800px';
+    matDiaglogConf.height = '700px';
+    matDiaglogConf.id = 'accountStatements';
+    matDiaglogConf.data = username;
+
+    this.matDiaglog.open(AccountStatementComponent, matDiaglogConf);
 
   }
 

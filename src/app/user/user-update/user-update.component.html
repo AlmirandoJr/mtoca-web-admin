@@ -1,35 +1,60 @@
-<br />
-<h2> {{ title }}</h2>
-<br />
-
-<div *ngIf="success" class="alert alert-success" role="alert">
+ 
+ <div *ngIf="success" class="alert alert-success" role="alert">
     {{ sucessMessage }}
-</div>
-<div class=" col-lg-6">
-
-    <form [formGroup]="form" (ngSubmit)="updateUser()">
-
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input formControlName="username" type="number" class="form-control" id="username" aria-describedby="usernameHelp">
-            <small id="usernameHelp" class="form-text text-muted">8x xx xx xx x</small>
-        </div>
-        <div class="form-group">
-            <label for="fullName">Nome Completo</label>
-            <input formControlName="fullName" type="text" class="form-control" id="fullName" required>
-        </div>
+ </div>
+ <div *ngIf="failture" class="alert alert-danger" role="alert">
+     {{ failtureFailture }}
+ </div>
+ 
 
 
-        <div class="form-group">
-            <label for="profileId ">Perfil</label>
-            <select class="form-control " id="profileId" formControlName="profile">
-            <option disabled value="null"> --Selecione perfil-- </option>
-            <option  *ngFor="let profile of profiles" [ngValue]="profile">{{ profile.description }}</option>
-        </select>
-        </div>
+<div class="container">
+    <h3> {{ title }}</h3>
+   
+     
+    <div class=" col-lg-12">
+        
+       
+
+        <form [formGroup]="form" (ngSubmit)="updateUser()">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input formControlName="username" type="number" class="form-control" id="username" aria-describedby="usernameHelp" required>
+                <small id="usernameHelp" class="form-text text-muted">8x xx xx xx x</small>
+            </div>
+            <div class="form-group">
+                <label for="name">Nome Completo</label>
+                <input formControlName="name" type="text" class="form-control" id="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input formControlName="city" type="text" class="form-control" id="city" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Genero</label>
+                <select class="form-control " id="gender" formControlName="gender" required>
+                    <option value="MALE"> Masculino </option>
+                    <option value="FEMALE"> Femenino </option> 
+                </select>
+
+            </div>
+            
+            <div class="form-group">
+                <label for="birthDate">Data de Nascimento</label>
+                <input formControlName="birthDate" type="date"  class="form-control" id="birthDate" required>
+            </div>
 
 
+            <div class="form-group">
+                <label for="profileId ">Perfil</label>
+                <select class="form-control" id="profileId" formControlName="profile" required>
+                    <option value="{{ profile.name }}"  *ngFor="let profile of profiles" [ngValue]="profile">{{ profile.name }}</option>
+                </select>
+            </div>
 
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Actualizar Utilizador</button>
-    </form>
+            <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Actualizar Utilizador</button>
+        </form>
+    </div>
 </div>

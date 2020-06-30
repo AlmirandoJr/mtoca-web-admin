@@ -11,6 +11,12 @@ import { FormBuilder } from '@angular/forms';
 })
 export class UpdateAccountModalComponent implements OnInit {
 
+  success :boolean=false;
+  failture :boolean=false;
+  successMessage:string = `Saldo da conta ` + this.data.code+` actualizado com sucesso`;
+  errorMessage:string = `Erro ao actualizar o saldo da conta: ` + this.data.code+``;
+   
+
   constructor(public dialogRef: MatDialogRef<UpdateAccountModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: AccountEntity,
               private accountService: AccountService,
@@ -26,14 +32,18 @@ export class UpdateAccountModalComponent implements OnInit {
 
   updateBalance() {
 
+    if(this.data.user.profile.hasOwnProperty('hibernateLazyInitializer')){
+      delete  this.data.user.profile.hibernateLazyInitializer;
+    }
+
     this.accountService.updateAccount( this.data,
-                                       this.form.value.amount,
-                                       this.form.value.description)
-      .subscribe(x => { },
-        e => { console.error(e.message); });
-
-    this.dialogRef.close();
-
+                                       this.form.controls.amount.value,
+                                       this.form.controls.description.value)
+      .subscribe(x => {this.success =true;
+      this.failture=false;
+    this.form.reset(); },
+        e => { this.failture=true;
+          console.error(e); });
   }
 
   cancel() {

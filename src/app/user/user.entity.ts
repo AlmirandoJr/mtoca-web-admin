@@ -1,4 +1,5 @@
 import { GenericEntity } from '../generic/generic.entity';
+import { ProfileEntity } from './profile.entity';
 
 
 export  class UserEntity extends GenericEntity {
@@ -8,6 +9,10 @@ export  class UserEntity extends GenericEntity {
    }
    username: string;
    password: string;
-   fullName: string;
+   name: string;
+   city:  string;
+   gender: string;
+   birthDate: Date;
+   profile: ProfileEntity;
 
 }

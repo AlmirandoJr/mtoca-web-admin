@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "mtoca-web-admin"
+  "defaultProject": "mtoca-web-admin",
+  "cli": {
+    "analytics": false
+  }
 }

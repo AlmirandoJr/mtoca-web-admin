@@ -1,0 +1,65 @@
+<br />
+
+<br />
+
+<div class="container">
+  
+   
+    <h2> {{ title }}</h2>
+    <br />
+
+    <br />
+    <button class="btn btn-primary" type="button" (click)="openNewMusic()">
+        Novo Musica
+     </button>
+
+     <br />
+
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Preco</th>
+                <th scope="col">titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Genenro</th>
+                <th scope="col">Colaborcao</th>
+                <th scope="col">D. Lancamento</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let music of musics">
+                <td>{{ music.code }}</td>
+                <td>{{ music.price | currency }}</td>
+                <td>{{ music.title  }}</td>
+                <td>{{ music.author.name }}</td>
+                <td>{{ music.genre  }}</td>
+                <td>{{ music.colaborators }}</td>
+                <td>{{ music.releaseDate | date }}</td>
+
+                <td>
+                    <button class="btn btn-info" type="button" (click)="loadContent( music )">
+                        Carregar
+                     </button>
+                </td>
+                
+                <td>
+                    <button class="btn btn-info" type="button" (click)="openUpdateMusic( music )">
+                    Editar
+                     </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" type="button" (click)="openDeleteMusic( music.code )">
+                    Remover
+                     </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

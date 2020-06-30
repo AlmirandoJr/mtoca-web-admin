@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ProfileService } from '../profile.service';
 import { ProfileEntity } from '../profile.entity';
 import { UserService } from '../user.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -16,20 +17,31 @@ export class UserAddComponent implements OnInit {
   user: UserEntity;
   profile: ProfileEntity;
   profiles: ProfileEntity [];
-  passNotMatching = false;
-  createSucessfulCreated = false;
+  
 
-  form = new FormGroup({username: new FormControl(''),
-    fullName: new FormControl(''),
+  success: boolean = false;
+  failture: boolean = false;
+  passNotMatching: boolean = false;
+  sucessMessage: string = 'Utilizador criado com sucesso';
+  failtureFailture: string = 'Erro ao criar utilizador';
+  
+
+  form = new FormGroup({
+    username: new FormControl(''),
+    name: new FormControl(''),
     password1: new  FormControl(''),
-    password2: new  FormControl('')
-   // profileControlName: new FormControl('')
+    password2: new  FormControl(''),
+    profileName: new FormControl(''),
+    city:   new FormControl(''),
+    gender: new FormControl(''),
+    birthDate: new FormControl('')
   });
 
 
   title = 'Novo Utilizador';
 
-  constructor(private profileService: ProfileService,
+  constructor(public dialogRef: MatDialogRef<UserAddComponent> ,
+              private profileService: ProfileService,
               private userService: UserService) {
 
   }
@@ -43,7 +55,10 @@ export class UserAddComponent implements OnInit {
 
   onSubmit() {
 
-    this.checkPasswordFields(this.form.value.password1, this.form.value.password2);
+    const  pass  =
+        this.checkPasswordFields(
+            this.form.value.password1,
+            this.form.value.password2);
 
     this.user = {
       id: null,
@@ -53,31 +68,36 @@ export class UserAddComponent implements OnInit {
       updatedBy: null,
       active: null,
       username: this.form.value.username,
-      password: this.form.value.password1,
-      fullName: this.form.value.fullName
+      password: pass,
+      name: this.form.value.name,
+      city: this.form.value.city,
+      gender: this.form.value.gender,
+      birthDate: this.form.value.birthDate,
+      profile: new ProfileEntity()
     };
 
-    // this.profile = this.form.controls.profileControlName.value;
-    // console.log(this.form.controls['profileControlName'].value);
+     this.profile = this.form.controls.profileName.value;
+    
+    this.userService.createUser(this.user,this.profile.name)
+        .subscribe(resp => {this.success=true;
+          this.failture=false;
+          this.form.reset();}
+          ,
+            err => { this.failture=true    });
 
-    this.userService.createUser(this.user)
-        .subscribe(resp => console.log('user saved sucessfuly', resp),
-            err => console.error('Error', err));
-
-    this.form.reset();
-    this.createSucessfulCreated = true;
+   
 
   }
 
   private checkPasswordFields(pass1: string, pass2: string) {
     if (  pass1 !== pass2 ) {
-      this.passNotMatching =  true;
-      return;
+      this.passNotMatching = true;
 
-    } else {
-    this.passNotMatching =  false;
-
+      return null;
     }
+    this.passNotMatching = false;
+    return pass1;
+
   }
 
 

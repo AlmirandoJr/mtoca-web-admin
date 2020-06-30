@@ -32,7 +32,7 @@ export class LogginComponent implements OnInit {
       this.form.value.password)
       .subscribe(data => {
                  this.uiError  = false;
-                 this.router.navigate(['/allusers']);
+                 this.router.navigate(['/all-users']);
         },
         e => { this.handleError(e);
                this.uiError  = true;
@@ -49,9 +49,9 @@ export class LogginComponent implements OnInit {
 
   private  handleError(error: HttpErrorResponse ) {
     if ( error instanceof ErrorEvent) {
-      console.error('ocorreu um ErrorEvent: ' + error.status);
-      console.error('mensagem do ErrorEvent: ' + error.message);
-      console.error('corpo do ErrorEvent: ' + error.error);
+      console.error('ocorreu um ErrorEvent: ' + error);
+      console.error('mensagem do ErrorEvent: ' + error);
+      console.error('corpo do ErrorEvent: ' + error);
 
     } else if( error.status === 401 ) {
 

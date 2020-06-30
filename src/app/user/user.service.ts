@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, empty, observable, Observer } from 'rxjs';
 import { UserEntity } from './user.entity';
-import { ProfileEntity } from './profile.entity';
 import { catchError, map } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
-import { ConstantPool } from '@angular/compiler';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,15 +17,8 @@ const httpOptions = {
 export class UserService {
    users: UserEntity [] ;
 observer: Observer<UserEntity>;
-  private getActiveUsersUrl = 'http://localhost:8080/user/findAllActive';
+  private userEndpointUrl = 'http://localhost:9090/users';
 
-  private createUserUrl = 'http://localhost:8080/user/createUser/';
-
-  private findUserByUrlUSername = 'http://localhost:8080/user/findByUsername';
-
-  private updateUserUrl = 'http://localhost:8080/user/updateUser';
-
-  private inactivateUSerUrl = 'http://localhost:8080/user/inactivateUser';
 
 
   constructor(private httpClient: HttpClient) { }
@@ -36,36 +27,40 @@ observer: Observer<UserEntity>;
 
   getActiveUsers(): Observable<any> {
 
-    return  this.httpClient.get<any>(this.getActiveUsersUrl);
+    return  this.httpClient.get<any>(this.userEndpointUrl);
 
   }
 
   findUserByUSername(username: string) {
 
-   return this.httpClient.get<UserEntity>(`${this.findUserByUrlUSername}/${username}`)
+   return this.httpClient.get<UserEntity>(`${this.userEndpointUrl}/${username}`)
       .pipe(map( x =>  x ));
 
   }
 
-  createUser(user: UserEntity)  {
-    this.httpClient.post<UserEntity>(this.createUserUrl, user )
-          .subscribe( null, error => console.log(error.message), null);
+  findUsersByProfileName(profileName: string) {
 
+    return this.httpClient.get(`${this.userEndpointUrl}/by-profile/${profileName}`)
+       .pipe(map( x =>  x ));
+ 
+   }
 
-    return new Observable<UserEntity>();
+  createUser(user: UserEntity,profileName: string)  {
+    return this.httpClient.post<UserEntity>(`${this.userEndpointUrl}/${profileName}`, user );
 
   }
 
-  updateUser(user: UserEntity, profile: ProfileEntity) {
-    console.log('### ' + profile.id);
-    console.log('### ' + profile.name);
-    return this.httpClient.put(`${this.updateUserUrl}/${profile.id}`, user);
+  updateUser(user: UserEntity, profile: string) {
+ 
+    return this.httpClient
+        .put(`${this.userEndpointUrl}/${profile}`, user);
+          
   }
 
 
   inactivateUser(username: string) {
 
-    return this.httpClient.delete(`${this.inactivateUSerUrl}/${username}`)
+    return this.httpClient.delete(`${this.userEndpointUrl}/${username}`)
       .pipe(map( x =>   x ),
       catchError (e => { throw new Error('ocorreu um erro ao apagar o user ' + username + e.message); }));
     }

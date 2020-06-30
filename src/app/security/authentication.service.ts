@@ -11,7 +11,7 @@ import { Observable, of, empty } from 'rxjs';
 export class AuthenticationService {
   username: string;
   password: string;
-  userUrl = 'http://localhost:8080/user/findByUsername';
+  usersUrl = 'http://localhost:9090/users';
   authenticated = false;
 
 
@@ -37,7 +37,7 @@ export class AuthenticationService {
       })
     };
 
-    return this.http.get<UserEntity>(`${this.userUrl}/${username}`, httpOptions)
+    return this.http.get<UserEntity>(`${this.usersUrl}/${username}`, httpOptions)
         .pipe( map (x => {
           sessionStorage.setItem('username', username);
           this.username = username;
