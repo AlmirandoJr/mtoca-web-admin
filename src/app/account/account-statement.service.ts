@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { AccountStatementEntity } from './AccountStatementEntity';
+import { AppConfig } from '../generic/app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { AccountStatementEntity } from './AccountStatementEntity';
 export class AccountStatementService {
 
 
-  accountStatementUrl  = 'http://localhost:9090/accountstatements';
+  accountStatementUrl  = AppConfig.API_URL+'/accountstatements';
   constructor(private httpCleint: HttpClient) { }
 
   findAccountStatementByUsername(username: string){
