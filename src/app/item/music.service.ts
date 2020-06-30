@@ -3,6 +3,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { MusicEntity } from './music';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AppConfig } from '../generic/app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MusicService {
 
   constructor(private httpClient: HttpClient) { }
 
-  itemsURI = 'http://localhost:9090/items';
+  itemsURI = AppConfig.API_URL+'/items';
 
 
   getmusic() {

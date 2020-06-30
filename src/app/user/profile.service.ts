@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProfileEntity } from './profile.entity';
 import { catchError } from 'rxjs/operators';
+import { AppConfig } from '../generic/app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  profileUrl = 'http://localhost:9090/profiles';
+  profileUrl = AppConfig.API_URL+'/profiles';
 
   constructor(private httpClient: HttpClient) { }
 

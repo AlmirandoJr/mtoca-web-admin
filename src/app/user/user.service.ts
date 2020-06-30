@@ -3,6 +3,7 @@ import { HttpClient , HttpHeaders, HttpErrorResponse } from '@angular/common/htt
 import { Observable, empty, observable, Observer } from 'rxjs';
 import { UserEntity } from './user.entity';
 import { catchError, map } from 'rxjs/operators';
+import { AppConfig } from '../generic/app.config';
 
 
 const httpOptions = {
@@ -17,7 +18,7 @@ const httpOptions = {
 export class UserService {
    users: UserEntity [] ;
 observer: Observer<UserEntity>;
-  private userEndpointUrl = 'http://localhost:9090/users';
+  private userEndpointUrl = AppConfig.API_URL+'/users';
 
 
 

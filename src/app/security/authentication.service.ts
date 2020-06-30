@@ -4,6 +4,7 @@ import { map, first, catchError, isEmpty } from 'rxjs/operators';
 
 import { UserEntity } from '../user/user.entity';
 import { Observable, of, empty } from 'rxjs';
+import { AppConfig } from '../generic/app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Observable, of, empty } from 'rxjs';
 export class AuthenticationService {
   username: string;
   password: string;
-  usersUrl = 'http://localhost:9090/users';
+  usersUrl = AppConfig.API_URL+'/users';
   authenticated = false;
 
 

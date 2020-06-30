@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountEntity } from './account-entity';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { AppConfig } from '../generic/app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,18 @@ import { catchError } from 'rxjs/operators';
 export class AccountService {
 
 
-  private findAllActiveUrl = 'http://localhost:9090/accounts';
+  private accountsUrl = AppConfig.API_URL+'/accounts';
 
 
-  private updateAccountUrl = 'http://localhost:9090/accounts';
 
   constructor(private httpClient: HttpClient) { }
 
   findAllActive() {
-    return this.httpClient.get<AccountEntity[]>(`${this.findAllActiveUrl}`);
+    return this.httpClient.get<AccountEntity[]>(`${this.accountsUrl}`);
   }
 
   updateAccount(account: AccountEntity, amount: number, description: string) {
-    return this.httpClient.put(`${this.updateAccountUrl}/${amount}/${description}`, account)
+    return this.httpClient.put(`${this.accountsUrl}/${amount}/${description}`, account)
         .pipe(catchError( e => {throw new Error('occorreu um erro ao  actualizar a conta'); }));
   }
 
