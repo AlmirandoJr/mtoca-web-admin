@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from '../music.service';
-import { MusicEntity } from '../music';
+import { ItemEntity } from '../item.entity';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { MusicCreateComponent } from '../music-create/music-create.component';
 import { MusicLoadContentComponent } from '../music-load-content/music-load-content.component';
@@ -18,11 +18,11 @@ export class MusicGetComponent implements OnInit {
               private matDialog: MatDialog) { }
 
   ngOnInit() {
-    this.musicService.getmusic().subscribe((m: MusicEntity[])=>this.musics = m);
+    this.musicService.getmusic().subscribe((m: ItemEntity[])=>this.musics = m);
   }
 
   title: string = 'Musicas Disponiveis';
-  musics: MusicEntity [];
+  musics: ItemEntity [];
 
   openNewMusic(){
 
@@ -38,7 +38,7 @@ export class MusicGetComponent implements OnInit {
 
   }
 
-  loadContent(music: MusicEntity){
+  loadContent(music: ItemEntity){
 
     const matDialogConfig= new  MatDialogConfig();
     matDialogConfig.disableClose = false;
@@ -51,7 +51,7 @@ export class MusicGetComponent implements OnInit {
 
  }
 
- openUpdateMusic(music: MusicEntity){
+ openUpdateMusic(music: ItemEntity){
 
   const matDialogConfig= new  MatDialogConfig();
     matDialogConfig.disableClose = false;

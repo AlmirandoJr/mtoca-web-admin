@@ -1,0 +1,41 @@
+
+<div *ngIf="success" class="alert alert-success" role="alert">
+    {{ sucessMessage }}
+</div>
+<div *ngIf="failture" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+</div>
+<br />
+
+<div class="container">
+    <div class=" col-lg-6">
+        <h2> Trabalho discografico</h2>
+
+        <form class="" [formGroup]="form" (ngSubmit)="saveJob()">
+
+            <div class="form-group">
+                <label for="artist1">Artista:</label>
+                <select class="form-control" formControlName="author" id="artist1" required>
+                    <option disabled value="null"> --Selecione o Author-- </option>
+                    <option value="{{ author.name }}" *ngFor="let author of authors" [ngValue] ="author.username">{{ author.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" class="form-control" formControlName="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select class="form-control" formControlName = "type" id= "type" required>
+                    <option disabled value="null">Tipo trabalho Disc.</option>
+                    <option value="{{ type }}" *ngFor="let type of jobTypes" [ngValue] = "type">{{ type }}</option>
+                </select>
+            </div>
+        
+           
+            
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid">Submit</button>
+            <button type="reset" class="btn btn-light">Apagar</button>
+        </form>
+    </div>
+</div>

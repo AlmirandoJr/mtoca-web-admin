@@ -1,0 +1,53 @@
+<br />
+
+<br />
+
+<div class="container">
+    
+    <h2> {{ title }}</h2>
+    <br />
+
+    <br />
+    <button class="btn btn-primary" type="button" (click)="openNewJobDialog()">
+        Novo Album
+     </button>
+
+     <br />
+
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">nome</th>
+                <th scope="col">Autor</th>
+                <th scope="col">tipo</th>
+                <th scope="col">codigo</th>
+                <th ></th>
+                <th ></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let job of jobs">
+                <td>{{ job.name }}</td>
+                <td>{{ job.author.name }}</td>
+                <td>{{ job.jobType }}</td>
+                <td>{{ job.code  }}</td>
+               
+                <td>
+                    <button class="btn btn-info" type="button" (click)="openUpdateJobDialog( job )">
+                        Editar
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" type="button" (click)="openDeleteJobDialog( job )">
+                        Remover
+                     </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

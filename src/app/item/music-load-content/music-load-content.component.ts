@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MusicEntity } from '../music';
+import { ItemEntity } from '../item.entity';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MusicService } from '../music.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -13,18 +13,18 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 export class MusicLoadContentComponent implements OnInit {
 
   constructor(public matDiaLogRef: MatDialogRef<MusicLoadContentComponent>,
-             @Inject (MAT_DIALOG_DATA) public data: MusicEntity,
+             @Inject (MAT_DIALOG_DATA) public data: ItemEntity,
              private formBuilder: FormBuilder,
              private musicService: MusicService) { }
 
-             musicData: MusicEntity;
+             musicData: ItemEntity;
              photoContent: File;
              musicContent: File;
 
              details:string = null;
   ngOnInit() {
     this.musicData =  this.data;
-    this.details = this.musicData.title +' '+ this.musicData.code;
+    this.details = this.musicData.name +' '+ this.musicData.code;
   }
   sucessPhoto :boolean = false;
   failturePhoto :boolean = false;

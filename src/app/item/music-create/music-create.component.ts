@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ProfileService } from '../../user/profile.service';
 import { UserProfileEntity } from '../../user/user-profile.entity';
-import { MusicEntity } from '../music';
+import { ItemEntity } from '../item.entity';
 import { MusicService } from '../music.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/user/user.service';
 import { UserEntity } from 'src/app/user/user.entity';
+import { JobService } from '../job.service';
+import { JobEntity } from '../job.entity';
 
 @Component({
   selector: 'app-music-create',
@@ -18,9 +20,12 @@ export class MusicCreateComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<MusicCreateComponent> ,
     private formBuilder: FormBuilder,
               private userService: UserService,
-              private  musicService: MusicService) { }
+              private  musicService: MusicService,
+              private jobService: JobService) { }
 
   artists: UserEntity [] = [];
+
+  jobs: JobEntity [] = [];
 
   sucess = false;
   failture = false;
@@ -30,8 +35,9 @@ export class MusicCreateComponent implements OnInit {
 
   form = this.formBuilder.group({
     author: [''],
+    jobs: [''],
     price: [''],
-    title: [''],
+    name: [''],
     genre: [''],
     colaborators: [''],
     releaseDate: ['']
@@ -43,28 +49,46 @@ export class MusicCreateComponent implements OnInit {
         .subscribe((a:UserEntity [])=> {this.artists = a });
   }
 
+  getJobsByArtist(event){
+    const user : UserEntity =  event;
+
+    console.log(user.name)
+    
+    this.jobService.getJobsByArtist(user.username)
+    .subscribe((succeed: JobEntity [] ) =>{
+        this.jobs = succeed;
+      },
+      error=>{
+        console.error('Error loading jobs for the artist:',error.message);
+      }
+    );
+
+       
+  }
+
   saveMusic() {
 
     const username: string = this.form.controls.author.value;
    
-    const music: MusicEntity = {
+    const music: ItemEntity = {
       id: null,
       creationDate: null,
       createdBy: null,
       updateDate: null,
       updatedBy: null,
       active: null,
-      author: null,
-      title: this.form.controls.title.value,
+      job: null,
+      name: this.form.controls.name.value,
       colaborators: this.form.controls.colaborators.value,
       genre: this.form.controls.genre.value,
       price: this.form.controls.price.value,
       releaseDate:this.form.controls.releaseDate.value,
       code: null,
-      job: null
     };
 
-    this.musicService.saveMusic(music, username)
+    const selectedJob: JobEntity = this.form.controls.jobs.value
+
+    this.musicService.saveMusic(music, selectedJob.code)
         .subscribe(x => { this.sucess = true;
                           this.sucessMessage = 'Upload da musica efectuado com sucesso!!!'; 
                           this.form.reset();

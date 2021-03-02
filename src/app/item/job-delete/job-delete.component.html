@@ -1,0 +1,11 @@
+<div *ngIf="success" class="alert alert-success" role="alert">
+    {{ sucessMessage }}
+ </div>
+ <div *ngIf="failture" class="alert alert-danger" role="alert">
+     {{ failtureFailture }}
+ </div>
+<h4>Remocao do trabalho discografico {{ data }}</h4>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="deleteJob($event)">Confirmo</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+</div>

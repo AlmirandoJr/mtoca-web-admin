@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MusicEntity } from '../music';
+import { ItemEntity } from '../item.entity';
 import { FormBuilder } from '@angular/forms';
 import { MusicService } from '../music.service';
 
@@ -12,7 +12,7 @@ import { MusicService } from '../music.service';
 export class MusicUpdateComponent implements OnInit {
 
   constructor(public matDiaLogRef: MatDialogRef<MusicUpdateComponent>,
-    @Inject (MAT_DIALOG_DATA) public data: MusicEntity,
+    @Inject (MAT_DIALOG_DATA) public data: ItemEntity,
     private formBuilder: FormBuilder,
     private musicService: MusicService)  { }
 
@@ -29,9 +29,8 @@ export class MusicUpdateComponent implements OnInit {
 
   form = this.formBuilder.group({
     code: this.data.code,
-    author: this.data.author.name,
     price: this.data.price,
-    title: this.data.title,
+    name: this.data.name,
     genre: this.data.genre,
     colaborators: this.data.colaborators,
     releaseDate: this.data.releaseDate
@@ -40,7 +39,7 @@ export class MusicUpdateComponent implements OnInit {
   update(){
 
 
-    const music = new  MusicEntity()
+    const music = new  ItemEntity()
 
     
     console.log(this.data.code)
@@ -49,16 +48,12 @@ export class MusicUpdateComponent implements OnInit {
     music.createdBy=this.data.createdBy;
     music.creationDate=this.data.creationDate;
     music.price=this.form.controls.price.value;
-    music.title=this.form.controls.title.value;
+    music.name=this.form.controls.title.value;
     music.genre=this.form.controls.genre.value;
     music.colaborators=this.form.controls.colaborators.value;
     music.releaseDate=this.form.controls.releaseDate.value;
 
-
-    if(this.data.author.profile.hasOwnProperty('hibernateLazyInitializer')){
-        delete  this.data.author.profile.hibernateLazyInitializer;
-    }
-    music.author=  this.data.author;
+  
 
 
     this.musicService.updateMusic(music).subscribe (

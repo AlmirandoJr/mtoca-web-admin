@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
-import { MusicEntity } from './music';
+import { ItemEntity } from './item.entity';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../generic/app.config';
@@ -21,8 +21,8 @@ export class MusicService {
               .pipe(catchError(e => { throw new  Error('' + e.message); }));
   }
 
-  saveMusic(music: MusicEntity,  usernane:string ){
-    return this.httpClient.post(`${this.itemsURI}/${usernane}`,music);
+  saveMusic(music: ItemEntity,  jobCode: string ){
+    return this.httpClient.post(`${this.itemsURI}/${jobCode}`,music);
   }
 
   uploadPhoto(code: String,formData: FormData):  Observable<HttpEvent<{}>>{
@@ -51,7 +51,7 @@ export class MusicService {
   
   
   }
-  updateMusic(music:MusicEntity){
+  updateMusic(music:ItemEntity){
     return this.httpClient.put(`${this.itemsURI}`,music);
   }
 

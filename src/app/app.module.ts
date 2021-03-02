@@ -24,6 +24,7 @@ import { MusicGetComponent } from './item/music-get/music-get.component';
 import { MusicLoadContentComponent } from './item/music-load-content/music-load-content.component';
 import { MusicUpdateComponent } from './item/music-update/music-update.component';
 import { MusicDeleteComponent } from './item/music-delete/music-delete.component';
+import { JobsGetComponent } from './item/jobs-get/jobs-get.component';
 
 
 @NgModule({
@@ -52,7 +53,9 @@ import { MusicDeleteComponent } from './item/music-delete/music-delete.component
       {path: 'create-music', component: MusicCreateComponent},
       {path: 'load-content', component: MusicLoadContentComponent},
       {path: 'update-music', component: MusicUpdateComponent},
-      {path: 'delete-music', component: MusicDeleteComponent}
+      {path: 'delete-music', component: MusicDeleteComponent},
+      {path: 'get-jobs', component: JobsGetComponent }
+
 
 
     ]),
