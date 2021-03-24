@@ -7,6 +7,9 @@ import { ProfileGetComponent } from './profile-get/profile-get.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { UserUpdateSelfDataComponent } from './user-update-self-data/user-update-self-data.component';
+import { UserUpdateSelfPhotoComponent } from './user-update-self-photo/user-update-self-photo.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.
     UserGetComponent,
     ProfileGetComponent,
     UserUpdateComponent,
-    DeleteUserModalComponent
+    DeleteUserModalComponent,
+    ChangePasswordComponent,
+    UserUpdateSelfDataComponent,
+    UserUpdateSelfPhotoComponent
   ],
   imports: [
     CommonModule, FormsModule,

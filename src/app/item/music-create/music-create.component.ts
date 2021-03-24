@@ -29,8 +29,11 @@ export class MusicCreateComponent implements OnInit {
 
   sucess = false;
   failture = false;
+  unsupportedMusicSeqNumber :boolean=false;
   errorMessage = null;
   sucessMessage = null;
+  unsupportedMusicSeqNumberMessage:string ='o numero de faixa dever variar enre 1 a 50'
+
 
 
   form = this.formBuilder.group({
@@ -40,7 +43,8 @@ export class MusicCreateComponent implements OnInit {
     name: [''],
     genre: [''],
     colaborators: [''],
-    releaseDate: ['']
+    releaseDate: [''],
+    seqNumber: ['']
   });
 
   ngOnInit() {
@@ -51,18 +55,20 @@ export class MusicCreateComponent implements OnInit {
 
   getJobsByArtist(event){
     const user : UserEntity =  event;
+    try {
+      this.jobService.getJobsByArtist(user.username)
+        .subscribe((succeed: JobEntity [] ) =>{
+                    this.jobs = succeed;
+                     },
+                    error=>{
+                      console.error('Error loading jobs for the artist:',error.message);
+                    }
+                );
 
-    console.log(user.name)
+    } catch (error) {
+      console.log('error this is fine no problem' )
+    }
     
-    this.jobService.getJobsByArtist(user.username)
-    .subscribe((succeed: JobEntity [] ) =>{
-        this.jobs = succeed;
-      },
-      error=>{
-        console.error('Error loading jobs for the artist:',error.message);
-      }
-    );
-
        
   }
 
@@ -82,20 +88,28 @@ export class MusicCreateComponent implements OnInit {
       colaborators: this.form.controls.colaborators.value,
       genre: this.form.controls.genre.value,
       price: this.form.controls.price.value,
+      seqNumber: this.form.controls.seqNumber.value,
       releaseDate:this.form.controls.releaseDate.value,
       code: null,
     };
+    if(music.seqNumber<1 ||music.seqNumber>50){
+      this.unsupportedMusicSeqNumber =true;
+      return;
+    }
 
     const selectedJob: JobEntity = this.form.controls.jobs.value
 
     this.musicService.saveMusic(music, selectedJob.code)
         .subscribe(x => { this.sucess = true;
                           this.sucessMessage = 'Upload da musica efectuado com sucesso!!!'; 
+                          this. unsupportedMusicSeqNumber = false;
                           this.form.reset();
                         },
                           
                    e => { this.failture = true;
-                          this.errorMessage = 'Erro ocorrido ao fazer upload da musica!!!';
+                    this. unsupportedMusicSeqNumber = false;      
+                    this.errorMessage = 'Erro ocorrido ao fazer upload da musica!!!';
+                         
                           console.error(e.message);
         });
 

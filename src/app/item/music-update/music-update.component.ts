@@ -17,10 +17,11 @@ export class MusicUpdateComponent implements OnInit {
     private musicService: MusicService)  { }
 
     sucess :boolean=false;
+    unsupportedMusicSeqNumber :boolean=false;
     failture :boolean=false;
     sucessMessage:string = `Dados da musica ` + this.data.code+` actualizados com sucesso`;
     errorMessage:string = `Erro ao actualizar os dados da musica: ` + this.data.code+``;
-     
+    unsupportedMusicSeqNumberMessage:string ='o numero de faixa dever variar enre 1 a 50'
 
 
   ngOnInit() {
@@ -33,14 +34,14 @@ export class MusicUpdateComponent implements OnInit {
     name: this.data.name,
     genre: this.data.genre,
     colaborators: this.data.colaborators,
-    releaseDate: this.data.releaseDate
+    releaseDate: this.data.releaseDate,
+    author:  this.data.job.author.name,
+    seqNumber: this.data.seqNumber
   });
 
   update(){
 
-
     const music = new  ItemEntity()
-
     
     console.log(this.data.code)
     music.code=this.data.code;
@@ -48,19 +49,32 @@ export class MusicUpdateComponent implements OnInit {
     music.createdBy=this.data.createdBy;
     music.creationDate=this.data.creationDate;
     music.price=this.form.controls.price.value;
-    music.name=this.form.controls.title.value;
+    music.name=this.form.controls.name.value;
     music.genre=this.form.controls.genre.value;
     music.colaborators=this.form.controls.colaborators.value;
     music.releaseDate=this.form.controls.releaseDate.value;
+    music.id = this.data.id;
+    music.active = this.data.active;
+    music.job = this.data.job;
+    music.seqNumber = this.form.controls.seqNumber.value;
 
-  
+    if(music.seqNumber<1 || music.seqNumber>50){
+      this.unsupportedMusicSeqNumber =true;
+      return;
+    }
 
 
     this.musicService.updateMusic(music).subscribe (
-        x=>{this.form.reset();
+        sucess=>{this.form.reset();
           this.sucess=true;
-          this.failture=false;}
-        ,x=>{this.failture=true;});
+          this.failture=false;
+          this.unsupportedMusicSeqNumber =false;
+        }
+        ,error=>{this.failture=true;
+          this.sucess=false;
+          this.unsupportedMusicSeqNumber =false;
+          console.error('error ao actualizar os dados da musica: ',error.message)
+        });
   }
 
 }

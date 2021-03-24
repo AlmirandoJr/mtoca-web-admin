@@ -1,0 +1,45 @@
+<br />
+
+<br />
+
+<div class="container">
+  
+   
+    <h2> {{ title }}</h2>
+    <br />
+
+    <br />
+    
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Nome do Job</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Preco</th>
+                <th scope="col">titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Genenro</th>
+                <th scope="col">Colaborcao</th>
+                <th scope="col">D. Lancamento</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let music of musics">
+                <td>{{ music.job.jobType }}</td>
+                <td>{{ music.job.name }}</td>
+                <td>{{ music.code }}</td>
+                <td>{{ music.price | currency }}</td>
+                <td>{{ music.name  }}</td>
+                <td>{{ music.job.author.name }}</td>
+                <td>{{ music.genre  }}</td>
+                <td>{{ music.colaborators }}</td>
+                <td>{{ music.releaseDate | date }}</td>
+
+    
+            </tr>
+        </tbody>
+    </table>
+</div>

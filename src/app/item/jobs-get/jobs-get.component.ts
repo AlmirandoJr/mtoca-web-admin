@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { JobDeleteComponent } from '../job-delete/job-delete.component';
+import { JobPhotoUploadComponent } from '../job-photo-upload/job-photo-upload.component';
 import { JobUpdateComponent } from '../job-update/job-update.component';
 import { JobEntity } from '../job.entity';
 import { JobService } from '../job.service';
@@ -17,7 +18,7 @@ export class JobsGetComponent implements OnInit {
     private matDialog:MatDialog) { }
 
   jobs: JobEntity []= [];
-  title: string; 'Trabalhos discograficos';
+  title: string = 'Trabalhos discograficos';
 
   ngOnInit(): void {
     this.jobService.getAllJobs()
@@ -57,6 +58,15 @@ export class JobsGetComponent implements OnInit {
 
     this.matDialog.open(JobDeleteComponent, matDialogConfig);
 
+  }
+
+  openUploadPhoto( job: JobEntity){
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.width = "800px"
+    matDialogConfig.height = "300px";
+    matDialogConfig.data = job;
+
+    this.matDialog.open(JobPhotoUploadComponent,matDialogConfig);
   }
 
 }

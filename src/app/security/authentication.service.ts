@@ -14,9 +14,17 @@ export class AuthenticationService {
   password: string;
   usersUrl = AppConfig.API_URL+'/users';
   authenticated = false;
+  adminLoggedin = false;
+  operatorLoggedin = false;
+  uploaderLoggedin = false;
+  artistLoggedin = false;
+  customeroggedin = false;
+  user: UserEntity =null;
+
 
 
   error: Error;
+  loggedIn:boolean = false;
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +34,6 @@ export class AuthenticationService {
 
     this.username = username;
     this.password = password;
-
 
     const token = btoa(username + ':' + password);
     const base64Token = 'Basic ' + token;
@@ -43,21 +50,83 @@ export class AuthenticationService {
           sessionStorage.setItem('username', username);
           this.username = username;
           this.password = password;
+          this.user = x;
+           if(x.profile.name==='ADMIN'){
+            this.adminLoggedin = true;
+            this.operatorLoggedin = false;
+            this.uploaderLoggedin = false;
+            this.artistLoggedin = false;
+            this.customeroggedin = false;
+
+           }else if(x.profile.name==='OPERATOR'){
+            this.adminLoggedin = false;
+            this.operatorLoggedin = true;
+            this.uploaderLoggedin = false;
+            this.artistLoggedin = false;
+            this.customeroggedin = false;
+
+           }else if(x.profile.name==='UPLOADER'){
+            this.adminLoggedin = false;
+            this.operatorLoggedin = false;
+            this.uploaderLoggedin = true;
+            this.artistLoggedin = false;
+            this.customeroggedin = false;
+             
+           }else if(x.profile.name==='ARTIST'){
+
+            this.adminLoggedin = false;
+            this.operatorLoggedin = false;
+            this.uploaderLoggedin = false;
+            this.artistLoggedin = true;
+            this.customeroggedin = false;
+          } else if(x.profile.name==='CUSTOMER'){
+            this.adminLoggedin = false;
+            this.operatorLoggedin = false;
+            this.uploaderLoggedin = false;
+            this.artistLoggedin = false;
+            this.customeroggedin = true;
+             
+          }
+
         })  );
 
   }
 
   isLoggenIn() {
     if ( sessionStorage.getItem('username')  === null ) {
-     return false;
+          this.loggedIn = false;
+          return this.loggedIn;
+
     }
-    return true;
+    this.loggedIn = true;
+    return this.loggedIn;
   }
 
   logout() {
     sessionStorage.removeItem('username');
     this.username = null;
     this.password = null;
+    this.loggedIn = false;
+  }
+
+  isAdminLoggedin(){
+    return this.adminLoggedin;
+  }
+  isOperatorLoggedin(){
+    return this.operatorLoggedin;
+  }
+  isUploaderLoggedin(){
+    return this.uploaderLoggedin;
+  }
+  isArtistLoggedin(){
+    return this.artistLoggedin;
+  }
+  isCustomerLoggedin(){
+    return this.customeroggedin;
+  }
+
+  resetPassword(username: string){
+    return this.http.put(`${this.usersUrl}/password-reset?username=${username}`,{});
   }
 
 }

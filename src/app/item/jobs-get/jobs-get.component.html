@@ -9,7 +9,7 @@
 
     <br />
     <button class="btn btn-primary" type="button" (click)="openNewJobDialog()">
-        Novo Album
+        Novo trabalho
      </button>
 
      <br />
@@ -24,6 +24,8 @@
                 <th scope="col">codigo</th>
                 <th ></th>
                 <th ></th>
+                <th ></th>
+
             </tr>
         </thead>
         <tbody>
@@ -42,6 +44,11 @@
                 <td>
                     <button class="btn btn-danger" type="button" (click)="openDeleteJobDialog( job )">
                         Remover
+                     </button>
+                </td>
+                <td>
+                    <button class="btn btn-info" type="button" (click)="openUploadPhoto( job )">
+                        Foto
                      </button>
                 </td>
 

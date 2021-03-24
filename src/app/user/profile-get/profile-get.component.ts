@@ -9,7 +9,7 @@ import { ProfileService } from '../profile.service';
 })
 export class ProfileGetComponent implements OnInit {
 
-  title = 'Perfies do Utilizador';
+  title = 'Perfis do Utilizador';
 
   profiles: ProfileEntity [];
 

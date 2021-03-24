@@ -25,6 +25,7 @@ export class LogginComponent implements OnInit {
 
   ngOnInit() {
   }
+  logo = '../../assets/logo.png'
 
   login() {
 
@@ -32,7 +33,7 @@ export class LogginComponent implements OnInit {
       this.form.value.password)
       .subscribe(data => {
                  this.uiError  = false;
-                 this.router.navigate(['/all-users']);
+                 this.router.navigate(['/get-music-read-only']);
         },
         e => { this.handleError(e);
                this.uiError  = true;

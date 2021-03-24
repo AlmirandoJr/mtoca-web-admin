@@ -43,7 +43,8 @@ export class UserUpdateComponent implements OnInit {
     private  formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    
+    console.log(`>>>>>>>>>>>>>${this.data.profile.name}`);
+
       this.userMtoca =  this.data;
 
     this.profileService.getProfiles().subscribe(data => { this.profiles = data; },

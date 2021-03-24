@@ -10,11 +10,13 @@ import { JobsGetComponent } from './jobs-get/jobs-get.component';
 import { JobsCreateComponent } from './jobs-create/jobs-create.component';
 import { JobUpdateComponent } from './job-update/job-update.component';
 import { JobDeleteComponent } from './job-delete/job-delete.component';
+import { JobPhotoUploadComponent } from './job-photo-upload/job-photo-upload.component';
+import { MusicGetReadOlnyComponent } from './music-get-read-olny/music-get-read-olny.component';
 
 
 
 @NgModule({
-  declarations: [MusicCreateComponent, MusicGetComponent, MusicLoadContentComponent, MusicUpdateComponent, MusicDeleteComponent, JobsGetComponent, JobsCreateComponent, JobUpdateComponent, JobDeleteComponent],
+  declarations: [MusicCreateComponent, MusicGetComponent, MusicLoadContentComponent, MusicUpdateComponent, MusicDeleteComponent, JobsGetComponent, JobsCreateComponent, JobUpdateComponent, JobDeleteComponent, JobPhotoUploadComponent, MusicGetReadOlnyComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

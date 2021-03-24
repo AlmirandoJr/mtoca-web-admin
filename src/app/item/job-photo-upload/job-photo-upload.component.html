@@ -1,0 +1,27 @@
+<div class="container">
+    <div class=" col-lg-10">
+        <h4> Carregamento de Conteudo do trabalho discografico</h4>
+
+        <form class="" [formGroup]="formPhoto" (ngSubmit)="loadPhoto()" >
+            <div *ngIf="sucessPhoto" class="alert alert-success" role="alert">
+                {{ sucessMessagePhoto }}
+            </div>
+            <div *ngIf="failturePhoto" class="alert alert-danger" role="alert">
+                {{ errorMessagePhoto }}
+            </div>
+            <br />   
+            <div  class="alert alert-info" role="alert">
+                {{ photoProgress.percentage }}%
+            </div>                    
+  
+            <div class="form-group">
+                <label for="photo">Foto:</label>
+                <input type="file" accept="image/jpeg, image/png" class="form-control-file" formControlName="photoContent" (change)="selectPhotoFile($event)"  id="photo" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!formPhoto.valid">Submit</button>
+           
+        </form>
+        
+    </div>
+</div>

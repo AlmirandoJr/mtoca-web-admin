@@ -7,6 +7,7 @@ export class ItemEntity extends GenericEntity {
     genre: string;
     colaborators: string;
     price: number;
+    seqNumber: number;
     code: string;
     releaseDate: Date;
     job: JobEntity;

@@ -1,0 +1,32 @@
+<div class="container">
+
+   
+    <div class="col-lg-10">
+        <h4> Actualizacao da photo do utilizador</h4>
+
+        <form class="" [formGroup]="formPhoto" (ngSubmit)="loadPhoto()" >
+            <div *ngIf="sucessLoading" class="alert alert-success" role="alert">
+                {{ sucessLoadingMessage }}
+            </div>
+            <div *ngIf="failtureLoading" class="alert alert-danger" role="alert">
+                {{ failtureLoadingMessage }}
+            </div>
+            <br />   
+            <div  class="alert alert-info" role="alert">
+                {{ photoProgress.percentage }}%
+            </div>                    
+  
+            <div class="form-group">
+                <label for="photo">Foto:</label>
+                <input type="file" accept="image/jpeg, image/png" class="form-control-file" formControlName="photoContent" (change)="selectPhotoFile($event)"  id="photo" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!formPhoto.valid">Submit</button>
+           
+        </form>
+        
+    </div>
+    <div class="col-lg-4">
+        <img  [src]= "userPhoto" width="300" height="300"/>
+    </div>
+</div>

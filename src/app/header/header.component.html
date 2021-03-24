@@ -1,19 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">MTOCA</a>
+    <img [src] = "logo"  width="40" height="40"/>
+    <a class="navbar-brand" > MTOCA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="authenticationService.isLoggenIn()">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"
+         *ngIf="authenticationService.loggedIn">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authenticationService.isAdminLoggedin">
             Utilizadores
                  </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" routerLink="/all-users">Utilizadores</a>
-
-                    <a class="dropdown-item" routerLink="/get-profiles">Perfieis</a>
+                    <a  *ngIf="authenticationService.isAdminLoggedin" class="dropdown-item" routerLink="/all-users">Utilizadores</a>
+                    <a class="dropdown-item" routerLink="/get-profiles" *ngIf="authenticationService.isAdminLoggedin">Perfis</a>
                 </div>
             </li>
 
@@ -24,7 +25,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/get-music">Musicas Disposniveis</a>
                     <a class="dropdown-item" routerLink="/get-jobs">Trabalhos discograficos</a>
-
                 </div>
             </li>
 
@@ -39,7 +39,24 @@
 
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <button class="btn btn-light" (click)="logout()">Sair</button>
+           
+            <a class="navbar-brand" >Utilizador: {{ authenticationService.username }}</a>
+                
+            <li class="nav-item dropdown ">
+                <a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Definicoes
+                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown ">
+                    <button class="btn btn-light" (click)="changePassword()">Alterar senha</button>
+                    <button class="btn btn-light" (click)="updateUserData()">Actualizar dados</button>
+                    <button class="btn btn-light" (click)="setProfilePhoto()">Aterar Foto de Perfil</button>
+                    <button class="btn btn-light" (click)="logout()">Sair</button>
+
+                </div>
+            </li>
+            
         </div>
     </div>
+   
+
 </nav>

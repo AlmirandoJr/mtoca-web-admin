@@ -25,6 +25,8 @@ import { MusicLoadContentComponent } from './item/music-load-content/music-load-
 import { MusicUpdateComponent } from './item/music-update/music-update.component';
 import { MusicDeleteComponent } from './item/music-delete/music-delete.component';
 import { JobsGetComponent } from './item/jobs-get/jobs-get.component';
+import { MusicGetReadOlnyComponent } from './item/music-get-read-olny/music-get-read-olny.component';
+import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -54,7 +56,10 @@ import { JobsGetComponent } from './item/jobs-get/jobs-get.component';
       {path: 'load-content', component: MusicLoadContentComponent},
       {path: 'update-music', component: MusicUpdateComponent},
       {path: 'delete-music', component: MusicDeleteComponent},
-      {path: 'get-jobs', component: JobsGetComponent }
+      {path: 'get-jobs', component: JobsGetComponent },
+      {path: 'get-music-read-only', component: MusicGetReadOlnyComponent },
+      {path: 'reset-password', component: ResetPasswordComponent}
+
 
 
 

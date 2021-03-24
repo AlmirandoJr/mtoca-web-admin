@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'jquery';
 import { Observable, throwError } from 'rxjs';
@@ -47,6 +47,19 @@ export class JobService {
 
   deleteJob(job: string){
     return this.httpClient.delete(`${this.uri}/${job}`);
+  }
+
+
+  uploadPhoto(code: String,formData: FormData):  Observable<HttpEvent<{}>>{
+
+    const httpRequest= new HttpRequest('POST',
+          `${this.uri}/photo/${code}`,
+            formData,
+            {reportProgress:true,
+              responseType: 'text'});
+  
+  return   this.httpClient.request(httpRequest);
+     
   }
 
   private handleError(error: HttpErrorResponse){

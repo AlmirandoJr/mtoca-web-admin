@@ -17,12 +17,13 @@ export class MusicGetComponent implements OnInit {
   constructor(private musicService: MusicService,
               private matDialog: MatDialog) { }
 
+  title: string = 'Musicas Disponiveis';
+  musics: ItemEntity [];
+
   ngOnInit() {
     this.musicService.getmusic().subscribe((m: ItemEntity[])=>this.musics = m);
   }
 
-  title: string = 'Musicas Disponiveis';
-  musics: ItemEntity [];
 
   openNewMusic(){
 

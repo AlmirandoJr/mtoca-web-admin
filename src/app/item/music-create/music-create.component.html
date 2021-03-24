@@ -5,6 +5,9 @@
 <div *ngIf="failture" class="alert alert-danger" role="alert">
     {{ errorMessage }}
 </div>
+<div *ngIf="unsupportedMusicSeqNumber" class="alert alert-danger" role="alert">
+    {{ unsupportedMusicSeqNumberMessage }}
+</div>
 <br />
 
 <div class="container">
@@ -30,23 +33,27 @@
             </div>
             <div class="form-group">
                 <label for="price">Preco:</label>
-                <input type="number" class="form-control" formControlName="price" id="price" required>
+                <input type="number" class="form-control" formControlName="price" id="price" required />
+            </div>
+            <div class="form-group">
+                <label for="seqNumber">Numero de faixa:</label>
+                <input type="number" max="50" min="1" class="form-control" formControlName="seqNumber" id="seqNumber" required />
             </div>
             <div class="form-group">
                 <label for="name">Titulo:</label>
-                <input type="text" class="form-control" formControlName="name" id="name" required>
+                <input type="text" class="form-control" formControlName="name" id="name" required />
             </div>
             <div class="form-group">
                 <label for="genre">Genero:</label>
-                <input type="text" class="form-control" formControlName="genre" id="genre" required>
+                <input type="text" class="form-control" formControlName="genre" id="genre" required />
             </div>
             <div class="form-group">
                 <label for="colaborators">Colaboracao:</label>
-                <input type="text" class="form-control" formControlName="colaborators" id="colaborators" required>
+                <input type="text" class="form-control" formControlName="colaborators" id="colaborators" />
             </div>
             <div class="form-group">
                 <label for="releaseDate">Data Lancamento:</label>
-                <input type="date" class="form-control" formControlName="releaseDate" id="releaseDate" required>
+                <input type="date" class="form-control" formControlName="releaseDate" id="releaseDate" required />
             </div>
            
             
