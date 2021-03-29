@@ -20,9 +20,8 @@
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input formControlName="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp" required>
-                <small id="usernameHelp" class="form-text text-muted">8x xx xx xx x</small>
-            </div>
+                <input  formControlName="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp" required>
+             </div>
             <div class="form-group">
                 <label for="name">Nome Completo</label>
                 <input formControlName="name" type="text" class="form-control" id="fullName" required>
@@ -49,9 +48,14 @@
 
             <div class="form-group">
                 <label for="profileId ">Perfil</label>
-                <select class="form-control" id="profileId" formControlName="profile" required>
+                <select class="form-control" id="profileId" formControlName="profile"  (ngModelChange)= 'onSelectProfile($event)' >
                     <option value="{{ profile }}"  *ngFor="let profile of profiles" [ngValue] = "profile.name">{{ profile.name }}</option>
                 </select>
+            </div>
+
+            <div *ngIf="displayBio" class="form-group">
+                <label for="bio">Biografia</label>
+                <textarea maxlength="500" formControlName="bio" class="form-control" id="bio"></textarea>
             </div>
 
             <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Actualizar Utilizador</button>

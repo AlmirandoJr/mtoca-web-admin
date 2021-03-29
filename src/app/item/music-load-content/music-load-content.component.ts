@@ -89,14 +89,19 @@ export class MusicLoadContentComponent implements OnInit {
 
     this.musicService.uploadMusic(this.musicData.code,formData) 
           .subscribe(event =>{ 
-            if(event.type===HttpEventType.UploadProgress){
-              this.musicProgress.percentage = Math.round(100 * event.loaded / event.total);
-            }
-            else  if(event.type===HttpEventType.Response){
-              this.sucessMusic =true; 
-              this.failtureMusic=false;
-            }
-            this.sucessMusic=true;},
-                    e => {this.failtureMusic=true;});
+                                if(event.type===HttpEventType.UploadProgress){
+                                  this.musicProgress.percentage = Math.round(100 * event.loaded / event.total);
+                                }
+                                else  if(event.type===HttpEventType.Response){
+                                  this.sucessMusic =true; 
+                                  this.failtureMusic=false;
+                                  this.formMusic.reset();
+                                }
+                             },
+                    e     => {
+                              this.failtureMusic=true;
+                              this.sucessMusic=false;
+                            }
+                    );
   }
 }

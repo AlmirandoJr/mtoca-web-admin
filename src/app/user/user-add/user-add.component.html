@@ -56,10 +56,15 @@
 
             <div class="form-group">
                 <label for="profileId ">Perfil</label>
-                <select class="form-control " id="profileId" formControlName="profileName">
-                    <option> --Selecione perfil-- </option>
+                <select class="form-control " id="profileId" formControlName="profileName" (ngModelChange)= 'onSelectProfile($event)'>
+                    <option disabled = "true"> --Selecione perfil-- </option>
                     <option  *ngFor="let profile of profiles" [ngValue]="profile">{{ profile.name }}</option>
                 </select>
+            </div>
+            <div *ngIf="displayBio" class="form-group">
+                <label for="bio">Biografia</label>
+                <textarea maxlength="500" formControlName="bio" class="form-control" id="bio"></textarea>
+
             </div>
           
             <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>

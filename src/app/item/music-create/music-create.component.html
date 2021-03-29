@@ -45,18 +45,21 @@
             </div>
             <div class="form-group">
                 <label for="genre">Genero:</label>
-                <input type="text" class="form-control" formControlName="genre" id="genre" required />
+                <select class="form-control" formControlName="genre" id="genre"  required>
+                    <option disabled value="null"> -- Selecione genero -- </option>
+                    <option value="{{ genre }}" *ngFor="let genre of genreTypes" [ngValue] ="genre">{{ genre }}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="colaborators">Colaboracao:</label>
                 <input type="text" class="form-control" formControlName="colaborators" id="colaborators" />
             </div>
             <div class="form-group">
-                <label for="releaseDate">Data Lancamento:</label>
-                <input type="date" class="form-control" formControlName="releaseDate" id="releaseDate" required />
+                <label for="colaborators">Gratuita: </label>
+                <input type="radio" formControlName="isFreeItem" [value]= true required> Sim  
+                <input type="radio" formControlName="isFreeItem" [value]= false required> Nao
             </div>
-           
-            
+        
             <button type="submit" class="btn btn-success" [disabled]="!form.valid">Submit</button>
             <button type="reset" class="btn btn-light">Apagar</button>
         </form>

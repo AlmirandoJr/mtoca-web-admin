@@ -24,9 +24,15 @@ export class JobPhotoUploadComponent implements OnInit {
   errorMessagePhoto: string = 'Erro ao carregar Imagem do trabalho discografico';
   photoProgress:  { percentage: number } = { percentage: 0 }; 
   photoContent: File;
+  jobPhoto:any;
 
 
   ngOnInit(): void {
+    this.jobService.downLoadPhoto(this.jobData.code)
+      .subscribe((baseImage : any) => {
+      this.createImageFromBlob(baseImage);
+    } );
+
   }
 
   formPhoto = this.formBuilder.group({
@@ -55,9 +61,26 @@ export class JobPhotoUploadComponent implements OnInit {
             else  if(event.type===HttpEventType.Response){
               this.sucessPhoto =true; 
               this.failturePhoto=false;
+
+              this.jobService.downLoadPhoto(this.jobData.code)
+              .subscribe((baseImage : any) => {
+              this.createImageFromBlob(baseImage);
+            } );
+            this.formPhoto.reset();
             }
             this.sucessPhoto=false;},
                     e => {this.failturePhoto=true;});
   }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.jobPhoto = reader.result;
+    }, false);
+ 
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+ }
 
 }

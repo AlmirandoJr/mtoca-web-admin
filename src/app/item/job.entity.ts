@@ -6,5 +6,7 @@ export class  JobEntity  extends GenericEntity{
     author: UserEntity;
     jobType: string;
     code: string;
+    releaseDate: Date;
+    jobPhoto: any;
 
 }

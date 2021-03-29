@@ -62,6 +62,13 @@ export class JobService {
      
   }
 
+  downLoadPhoto(jobCode: string):Observable<Blob>{
+
+    return this.httpClient.get(`${this.uri}/photo/${jobCode}`,
+      {responseType: 'blob'});
+     
+  }
+
   private handleError(error: HttpErrorResponse){
       if(error.error instanceof ErrorEvent){
          console.error('ocorreu um erro', error.error.message);

@@ -34,13 +34,15 @@ failture: boolean = false;
     code: this.job.code,
     name: this.job.name,
     author: this.job.author.name,
-    type: this.job.jobType
+    type: this.job.jobType,
+    releaseDate: this.job.releaseDate
   });
 
   updateJob(){
     const  username:string = this.job.author.username;
     this.job.jobType = this.form.controls.type.value;
     this.job.name = this.form.controls.name.value;
+    this.job.releaseDate = this.form.controls.releaseDate.value;
 
     this.jobService.updateJob(this.job,username)
       .subscribe(

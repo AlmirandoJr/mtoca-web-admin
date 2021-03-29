@@ -59,8 +59,8 @@ export class UserGetComponent implements OnInit {
   openCreateUser(){
     const matDialogConf = new  MatDialogConfig();
     matDialogConf.disableClose = false;
-    matDialogConf.height = '550px';
-    matDialogConf.width = '800px';
+    matDialogConf.height = '850px';
+    matDialogConf.width = '1000px';
     matDialogConf.id = 'createuser';
 
     const  dialog = this.matDialog.open(UserAddComponent, matDialogConf);
@@ -72,8 +72,8 @@ export class UserGetComponent implements OnInit {
   openUpdateUser(user: UserEntity){
     const matDialogConf = new  MatDialogConfig();
     matDialogConf.disableClose = false;
-    matDialogConf.height = '550px';
-    matDialogConf.width = '800px';
+    matDialogConf.height = '850px';
+    matDialogConf.width = '1000px';
     matDialogConf.id = 'UpdateUser';
     matDialogConf.data = user;
 

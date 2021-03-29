@@ -8,8 +8,7 @@ export class ItemEntity extends GenericEntity {
     colaborators: string;
     price: number;
     seqNumber: number;
-    code: string;
-    releaseDate: Date;
     job: JobEntity;
-
+    isFreeItem: boolean;
+    code: string;
 }

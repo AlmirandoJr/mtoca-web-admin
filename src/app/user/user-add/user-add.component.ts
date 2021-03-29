@@ -21,6 +21,7 @@ export class UserAddComponent implements OnInit {
 
   success: boolean = false;
   failture: boolean = false;
+  displayBio: boolean = false;
   passNotMatching: boolean = false;
   sucessMessage: string = 'Utilizador criado com sucesso';
   failtureFailture: string = 'Erro ao criar utilizador';
@@ -34,7 +35,8 @@ export class UserAddComponent implements OnInit {
     profileName: new FormControl(''),
     city:   new FormControl(''),
     gender: new FormControl(''),
-    birthDate: new FormControl('')
+    birthDate: new FormControl(''),
+    bio:  new FormControl('')
   });
 
 
@@ -73,7 +75,8 @@ export class UserAddComponent implements OnInit {
       city: this.form.value.city,
       gender: this.form.value.gender,
       birthDate: this.form.value.birthDate,
-      profile: new ProfileEntity()
+      profile: new ProfileEntity(),
+      bio: this.form.controls.bio.value
     };
 
      this.profile = this.form.controls.profileName.value;
@@ -98,6 +101,16 @@ export class UserAddComponent implements OnInit {
     this.passNotMatching = false;
     return pass1;
 
+  }
+
+  onSelectProfile(event){
+    let profile: ProfileEntity = event;
+
+    if(profile.name === 'ARTIST'){
+      this.displayBio = true;
+    }else{
+      this.displayBio = false;
+    }
   }
 
 

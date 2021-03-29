@@ -52,6 +52,9 @@ export class MusicService {
   
   }
   updateMusic(music:ItemEntity){
+    console.log('gratuita: '+music.isFreeItem)
+
+    console.log('$$@@#$ :::'+music)
     return this.httpClient.put(`${this.itemsURI}`,music);
   }
 

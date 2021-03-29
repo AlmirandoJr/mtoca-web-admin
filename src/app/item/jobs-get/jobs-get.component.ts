@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { FileUtils } from 'src/app/generic/FileUtils';
 import { JobDeleteComponent } from '../job-delete/job-delete.component';
 import { JobPhotoUploadComponent } from '../job-photo-upload/job-photo-upload.component';
 import { JobUpdateComponent } from '../job-update/job-update.component';
@@ -20,11 +22,19 @@ export class JobsGetComponent implements OnInit {
   jobs: JobEntity []= [];
   title: string = 'Trabalhos discograficos';
 
+  minha :any
+
   ngOnInit(): void {
-    this.jobService.getAllJobs()
-    .subscribe(
-      x => { this.jobs = x; },
-      e => { console.error(e); } );
+    const jobObservable : Observable<JobEntity[]> = this.jobService.getAllJobs();
+    
+    jobObservable.subscribe(
+      x  => { 
+            this.jobs = x;            
+      },
+      e  => { console.error(e); }
+      );
+
+    
   }
   openNewJobDialog(){
     const matDialogConfig = new MatDialogConfig();
@@ -62,11 +72,13 @@ export class JobsGetComponent implements OnInit {
 
   openUploadPhoto( job: JobEntity){
     const matDialogConfig = new MatDialogConfig();
-    matDialogConfig.width = "800px"
-    matDialogConfig.height = "300px";
+    matDialogConfig.width = "700px"
+    matDialogConfig.height = "700px";
     matDialogConfig.data = job;
 
     this.matDialog.open(JobPhotoUploadComponent,matDialogConfig);
   }
+
+  
 
 }

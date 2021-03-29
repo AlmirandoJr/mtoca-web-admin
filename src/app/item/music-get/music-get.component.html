@@ -26,8 +26,8 @@
                 <th scope="col">titulo</th>
                 <th scope="col">Autor</th>
                 <th scope="col">Genenro</th>
-                <th scope="col">Colaborcao</th>
-                <th scope="col">D. Lancamento</th>
+                <th scope="col">Faixa</th>
+                <th scope="col">Gratuita</th>
                 <th scope="col"> </th>
                 <th scope="col"> </th>
                 <th scope="col"> </th>
@@ -43,8 +43,8 @@
                 <td>{{ music.name  }}</td>
                 <td>{{ music.job.author.name }}</td>
                 <td>{{ music.genre  }}</td>
-                <td>{{ music.colaborators }}</td>
-                <td>{{ music.releaseDate | date }}</td>
+                <td>{{ music.seqNumber }}</td>
+                <td>{{ music.isFreeItem === true ? 'Sim' : 'Nao' }}</td>
 
                 <td>
                     <button class="btn btn-info" type="button" (click)="loadContent( music )">

@@ -22,6 +22,7 @@
                 <th scope="col">Autor</th>
                 <th scope="col">tipo</th>
                 <th scope="col">codigo</th>
+                <th scope="col">Lancado em </th> 
                 <th ></th>
                 <th ></th>
                 <th ></th>
@@ -35,6 +36,7 @@
                 <td>{{ job.author.name }}</td>
                 <td>{{ job.jobType }}</td>
                 <td>{{ job.code  }}</td>
+                <td>{{ job.releaseDate | date  }}</td>
                
                 <td>
                     <button class="btn btn-info" type="button" (click)="openUpdateJobDialog( job )">

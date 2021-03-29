@@ -33,7 +33,30 @@ export class MusicCreateComponent implements OnInit {
   errorMessage = null;
   sucessMessage = null;
   unsupportedMusicSeqNumberMessage:string ='o numero de faixa dever variar enre 1 a 50'
-
+  genreTypes: string[]=['Afro',
+    'Afro House',
+    'Afro Pop',
+    'Amapiano',
+    'Blues',
+    'Clássica / Erudita',
+    'Funana',
+    'Funk',
+    'Gospel',
+    'Hip Hop / Rap',
+    'House',
+    'Jazz',
+    'Kwassa Kwassa',
+    'Latina',
+    'Marrabenta',
+    'Pandza',
+    'Pop',
+    'Ragga / Dancehall',
+    'Reggae',
+    'R & B / Soul',
+    'Rock',
+    'Samba',
+    'Semba',
+    'Zouk / Kizomba'];
 
 
   form = this.formBuilder.group({
@@ -44,7 +67,8 @@ export class MusicCreateComponent implements OnInit {
     genre: [''],
     colaborators: [''],
     releaseDate: [''],
-    seqNumber: ['']
+    seqNumber: [''],
+    isFreeItem: ['']
   });
 
   ngOnInit() {
@@ -89,8 +113,9 @@ export class MusicCreateComponent implements OnInit {
       genre: this.form.controls.genre.value,
       price: this.form.controls.price.value,
       seqNumber: this.form.controls.seqNumber.value,
-      releaseDate:this.form.controls.releaseDate.value,
       code: null,
+      isFreeItem: this.form.controls.isFreeItem.value,
+
     };
     if(music.seqNumber<1 ||music.seqNumber>50){
       this.unsupportedMusicSeqNumber =true;

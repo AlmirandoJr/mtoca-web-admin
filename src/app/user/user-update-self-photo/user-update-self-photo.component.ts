@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FileUtils } from 'src/app/generic/FileUtils';
 import { UserEntity } from '../user.entity';
 import { UserService } from '../user.service';
 
@@ -25,7 +26,7 @@ export class UserUpdateSelfPhotoComponent implements OnInit {
 
     this.userService.downLoadPhoto(this.user.username)
       .subscribe((baseImage : any) => {
-        this.createImageFromBlob(baseImage)
+        this.createImageFromBlob(baseImage);
       } );
   }
 
@@ -42,7 +43,7 @@ export class UserUpdateSelfPhotoComponent implements OnInit {
 
 
 
-  formPhoto = this.formBuilder.group({
+  form = this.formBuilder.group({
     photoContent: new FormControl('')
   });
 
@@ -65,9 +66,8 @@ export class UserUpdateSelfPhotoComponent implements OnInit {
 
               this.userService.downLoadPhoto(this.user.username)
                 .subscribe((baseImage : any) => {
-                  this.createImageFromBlob(baseImage)
-       
-      });
+                  this.createImageFromBlob(baseImage)});
+              this.form.reset();
             }
             this.sucessLoading=false;},
                     e => {this.failtureLoading=true;});

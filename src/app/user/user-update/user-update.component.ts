@@ -1,12 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '../user.service';
 import { ProfileService } from '../profile.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileEntity } from '../profile.entity';
 import { UserEntity } from '../user.entity';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserGetComponent } from '../user-get/user-get.component';
+import { BinaryOperatorExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-update',
@@ -22,16 +23,22 @@ export class UserUpdateComponent implements OnInit {
   sucessMessage: string = 'Utilizador actualizado com sucesso';
   failtureFailture: string = 'Erro ao actualizar utilizador';
   title :string = 'Actualizar  utilizador';
+  displayBio: boolean = this.data.profile.name ==='ARTIST';
+
 
   profiles: ProfileEntity [] = [];
   userMtoca: UserEntity = null;
   form = this.formBuilder.group({
-    username: this.data.username,
+    username: new FormControl({
+      value:  this.data.username,
+      disabled: true
+    }, Validators.required),
     name:   this.data.name,
     city: this.data.city,
     gender: this.data.gender,
     birthDate: this.data.birthDate,
-    profile: this.data.profile.name
+    profile: this.data.profile.name,
+    bio: this.data.bio
 
   });
 
@@ -43,8 +50,6 @@ export class UserUpdateComponent implements OnInit {
     private  formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    console.log(`>>>>>>>>>>>>>${this.data.profile.name}`);
-
       this.userMtoca =  this.data;
 
     this.profileService.getProfiles().subscribe(data => { this.profiles = data; },
@@ -59,6 +64,7 @@ export class UserUpdateComponent implements OnInit {
     this.userMtoca.birthDate = this.form.controls.birthDate.value;
     this.userMtoca.city =  this.form.controls.city.value;
     this.userMtoca.gender = this.form.controls.gender.value;
+    this.userMtoca.bio = this.form.controls.bio.value;
 
     const selectedProfileName :string = this.form.controls.profile.value;
 
@@ -70,6 +76,17 @@ export class UserUpdateComponent implements OnInit {
                         this.form.reset(); },
                  e => { console.error(e.message);
                         this.failture = true; });
+  }
+
+  onSelectProfile(event){
+
+    const profileName: string= event;
+
+    if(profileName === 'ARTIST'){
+      this.displayBio = true;
+    }else{
+      this.displayBio = false;
+    }
   }
 
 }

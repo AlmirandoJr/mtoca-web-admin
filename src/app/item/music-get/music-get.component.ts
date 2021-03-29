@@ -21,7 +21,11 @@ export class MusicGetComponent implements OnInit {
   musics: ItemEntity [];
 
   ngOnInit() {
-    this.musicService.getmusic().subscribe((m: ItemEntity[])=>this.musics = m);
+    this.musicService.getmusic()
+      .subscribe(
+        (m: ItemEntity[])=>{this.musics = m},
+      );
+    
   }
 
 
@@ -29,7 +33,7 @@ export class MusicGetComponent implements OnInit {
 
      const matDialogConfig= new  MatDialogConfig();
      matDialogConfig.disableClose = false;
-     matDialogConfig.height = '550px';
+     matDialogConfig.height = '1000px';
      matDialogConfig.width = '800px';
      matDialogConfig.id = 'newMusic';
 
@@ -56,7 +60,7 @@ export class MusicGetComponent implements OnInit {
 
   const matDialogConfig= new  MatDialogConfig();
     matDialogConfig.disableClose = false;
-    matDialogConfig.height = '550px';
+    matDialogConfig.height = '1000px';
     matDialogConfig.width = '800px';
     matDialogConfig.id = 'loadContent';
     matDialogConfig.data = music;

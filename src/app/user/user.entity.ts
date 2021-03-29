@@ -14,5 +14,6 @@ export  class UserEntity extends GenericEntity {
    gender: string;
    birthDate: Date;
    profile: ProfileEntity;
+   bio: string
 
 }

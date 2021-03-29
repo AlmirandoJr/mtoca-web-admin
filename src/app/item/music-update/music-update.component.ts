@@ -19,9 +19,34 @@ export class MusicUpdateComponent implements OnInit {
     sucess :boolean=false;
     unsupportedMusicSeqNumber :boolean=false;
     failture :boolean=false;
-    sucessMessage:string = `Dados da musica ` + this.data.code+` actualizados com sucesso`;
-    errorMessage:string = `Erro ao actualizar os dados da musica: ` + this.data.code+``;
-    unsupportedMusicSeqNumberMessage:string ='o numero de faixa dever variar enre 1 a 50'
+    sucessMessage :string = `Dados da musica ` + this.data.code+` actualizados com sucesso`;
+    errorMessage :string = `Erro ao actualizar os dados da musica: ` + this.data.code+``;
+    unsupportedMusicSeqNumberMessage :string ='o numero de faixa dever variar enre 1 a 50';
+    genreTypes: string[]=['Afro',
+    'Afro House',
+    'Afro Pop',
+    'Amapiano',
+    'Blues',
+    'Clássica / Erudita',
+    'Funana',
+    'Funk',
+    'Gospel',
+    'Hip Hop / Rap',
+    'House',
+    'Jazz',
+    'Kwassa Kwassa',
+    'Latina',
+    'Marrabenta',
+    'Pandza',
+    'Pop',
+    'Ragga / Dancehall',
+    'Reggae',
+    'R & B / Soul',
+    'Rock',
+    'Samba',
+    'Semba',
+    'Zouk / Kizomba'];
+
 
 
   ngOnInit() {
@@ -34,9 +59,10 @@ export class MusicUpdateComponent implements OnInit {
     name: this.data.name,
     genre: this.data.genre,
     colaborators: this.data.colaborators,
-    releaseDate: this.data.releaseDate,
     author:  this.data.job.author.name,
-    seqNumber: this.data.seqNumber
+    seqNumber: this.data.seqNumber,
+    isFreeItem: this.data.isFreeItem
+  
   });
 
   update(){
@@ -52,11 +78,12 @@ export class MusicUpdateComponent implements OnInit {
     music.name=this.form.controls.name.value;
     music.genre=this.form.controls.genre.value;
     music.colaborators=this.form.controls.colaborators.value;
-    music.releaseDate=this.form.controls.releaseDate.value;
     music.id = this.data.id;
     music.active = this.data.active;
     music.job = this.data.job;
     music.seqNumber = this.form.controls.seqNumber.value;
+    music.isFreeItem = this.form.controls.isFreeItem.value;
+
 
     if(music.seqNumber<1 || music.seqNumber>50){
       this.unsupportedMusicSeqNumber =true;
@@ -65,10 +92,11 @@ export class MusicUpdateComponent implements OnInit {
 
 
     this.musicService.updateMusic(music).subscribe (
-        sucess=>{this.form.reset();
+        sucess=>{
           this.sucess=true;
           this.failture=false;
           this.unsupportedMusicSeqNumber =false;
+          this.form.reset();
         }
         ,error=>{this.failture=true;
           this.sucess=false;

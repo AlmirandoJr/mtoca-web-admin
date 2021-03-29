@@ -26,7 +26,8 @@ export class JobsCreateComponent implements OnInit {
     form = this.formBuilder.group({
       author: [''],
       name: [''],
-      type: ['']
+      type: [''],
+      releaseDate: ['']
     })
 
     jobTypes: String [] = [];
@@ -54,7 +55,9 @@ export class JobsCreateComponent implements OnInit {
       name: this.form.controls.name.value,
       author: new UserEntity(),
       jobType: this.form.controls.type.value,
-      code: null  
+      code: null , 
+      releaseDate:this.form.controls.releaseDate.value,
+      jobPhoto :null
     };
 
     this.jobService.createJob(job,username)
