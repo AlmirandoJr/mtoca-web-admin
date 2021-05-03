@@ -37,7 +37,7 @@ export class JobsCreateComponent implements OnInit {
     this.jobService.getJobtypes().subscribe(
       (type: String []) => {this.jobTypes=type;});
 
-      this.userService.findUsersByProfileName('ARTIST')
+      this.userService.findAuthors()
         .subscribe((u: UserEntity[])=>{ this.authors = u;});
   }
 

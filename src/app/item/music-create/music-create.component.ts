@@ -73,7 +73,7 @@ export class MusicCreateComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userService.findUsersByProfileName('artist')
+    this.userService.findAuthors()
         .subscribe((a:UserEntity [])=> {this.artists = a });
   }
 

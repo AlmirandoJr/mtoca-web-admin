@@ -68,8 +68,6 @@ export class LogginComponent implements OnInit {
       console.error('mensagem do erro: ' + error.message);
       console.error('corpo do erro: ' + error.error);
     }
-    // console.log('Erro inesperado ' + error.message);
-
   }
 
 }

@@ -46,6 +46,13 @@ observer: Observer<UserEntity>;
  
    }
 
+   findAuthors() {
+
+    return this.httpClient.get(`${this.userEndpointUrl}/author`)
+       .pipe(map( x =>  x ));
+ 
+   }
+
   createUser(user: UserEntity,profileName: string)  {
     return this.httpClient.post<UserEntity>(`${this.userEndpointUrl}/${profileName}`, user );
 

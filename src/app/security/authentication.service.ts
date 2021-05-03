@@ -45,7 +45,7 @@ export class AuthenticationService {
       })
     };
 
-    return this.http.get<UserEntity>(`${this.usersUrl}/${username}`, httpOptions)
+    return this.http.get<UserEntity>(`${this.usersUrl}/user-data`, httpOptions)
         .pipe( map (x => {
           sessionStorage.setItem('username', username);
           this.username = username;
