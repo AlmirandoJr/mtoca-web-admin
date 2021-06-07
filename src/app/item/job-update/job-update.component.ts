@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -33,6 +34,7 @@ failture: boolean = false;
   form = this.formBuilder.group({
     code: this.job.code,
     name: this.job.name,
+    price: this.job.price,
     author: this.job.author.name,
     type: this.job.jobType,
     releaseDate: this.job.releaseDate
@@ -43,6 +45,7 @@ failture: boolean = false;
     this.job.jobType = this.form.controls.type.value;
     this.job.name = this.form.controls.name.value;
     this.job.releaseDate = this.form.controls.releaseDate.value;
+    this.job.price =  this.form.controls.price.value;
 
     this.jobService.updateJob(this.job,username)
       .subscribe(
@@ -51,9 +54,10 @@ failture: boolean = false;
                     console.log(`Trabalho discografico ${this.job.code} actualizado com sucesso`);
                     this.form.reset();
         },
-        error => {
+        (error: HttpErrorResponse) => {
                     this.failture =true;
                     this.sucess = false;
+                    this.errorMessage = error.error.message+"";
                     console.error(`Erro ao actualizar trabalho discografico ${this.job.code}`)
         });
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-delete-user-modal',
@@ -29,7 +30,9 @@ export class DeleteUserModalComponent implements OnInit {
     .subscribe(x => { event.target.disabled= true;
                       this.success=true;
                       this.failture=false},
-      x => {this.failture=true });
+                (e: HttpErrorResponse) => {this.failture=true;
+                this.success=false;
+                this.failtureFailture = e.error.message+""; });
   }
 
   dontConfirm() {

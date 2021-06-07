@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MusicService } from '../music.service';
 import { ItemEntity } from '../item.entity';
-import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MusicCreateComponent } from '../music-create/music-create.component';
 import { MusicLoadContentComponent } from '../music-load-content/music-load-content.component';
 import { MusicUpdateComponent } from '../music-update/music-update.component';
 import { MusicDeleteComponent } from '../music-delete/music-delete.component';
+import { JobEntity } from '../job.entity';
 
 @Component({
   selector: 'app-music-get',

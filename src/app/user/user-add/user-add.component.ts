@@ -5,6 +5,7 @@ import { ProfileService } from '../profile.service';
 import { ProfileEntity } from '../profile.entity';
 import { UserService } from '../user.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -86,7 +87,10 @@ export class UserAddComponent implements OnInit {
           this.failture=false;
           this.form.reset();}
           ,
-            err => { this.failture=true    });
+            (err:HttpErrorResponse) => { this.failture=true,
+              this.success=false;
+              this.failtureFailture= err.error.message+"";
+                });
 
    
 

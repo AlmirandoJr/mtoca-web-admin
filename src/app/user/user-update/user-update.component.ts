@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserGetComponent } from '../user-get/user-get.component';
 import { BinaryOperatorExpr } from '@angular/compiler';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-update',
@@ -74,8 +75,10 @@ export class UserUpdateComponent implements OnInit {
       .subscribe(x => {  this.success = true;
                          this.failture = false;
                         this.form.reset(); },
-                 e => { console.error(e.message);
-                        this.failture = true; });
+                 (e: HttpErrorResponse) => { console.error(e.error.message);
+                        this.failture = true;
+                        this.success = false;
+                        this.failtureFailture =e.error.message+""; });
   }
 
   onSelectProfile(event){

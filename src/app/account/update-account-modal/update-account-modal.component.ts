@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AccountEntity } from '../account-entity';
 import { AccountService } from '../account.service';
 import { FormBuilder } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-account-modal',
@@ -42,8 +43,11 @@ export class UpdateAccountModalComponent implements OnInit {
       .subscribe(x => {this.success =true;
       this.failture=false;
     this.form.reset(); },
-        e => { this.failture=true;
-          console.error(e); });
+    (e: HttpErrorResponse)     => { this.failture=true;
+          console.error(e);
+          this.errorMessage = e.error.message+"";
+
+        });
   }
 
   cancel() {

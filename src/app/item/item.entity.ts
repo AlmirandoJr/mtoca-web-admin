@@ -9,6 +9,6 @@ export class ItemEntity extends GenericEntity {
     price: number;
     seqNumber: number;
     job: JobEntity;
-    isFreeItem: boolean;
+    freeItem: boolean;
     code: string;
 }

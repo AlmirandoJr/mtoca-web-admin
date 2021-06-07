@@ -5,3 +5,7 @@ nav {
     border-radius: 30px;
 
 }
+
+#loggedUser{
+    color: white;
+}

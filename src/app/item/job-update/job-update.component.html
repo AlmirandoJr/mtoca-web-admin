@@ -42,6 +42,10 @@
                     formControlName="releaseDate" id="releaseDate" 
                      required>
             </div>
+            <div class="form-group">
+                <label for="price">Preco:</label>
+                <input type="number" class="form-control" formControlName="price" id="price" required />
+            </div>
             
             <button type="submit" class="btn btn-success" [disabled]="!form.valid">Submit</button>
             <button type="reset" class="btn btn-light">Apagar</button>

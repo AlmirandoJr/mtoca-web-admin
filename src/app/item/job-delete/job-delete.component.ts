@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobEntity } from '../job.entity';
@@ -30,9 +31,11 @@ export class JobDeleteComponent implements OnInit {
           this.success = true;
           this.failture = false;
         },
-        error => {
+        (error: HttpErrorResponse) => {
           this.success = false;
           this.failture = true;
+          this.failtureFailture = error.error.message+"";
+
         });
   }
 

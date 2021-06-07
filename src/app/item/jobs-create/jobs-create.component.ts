@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -26,6 +27,7 @@ export class JobsCreateComponent implements OnInit {
     form = this.formBuilder.group({
       author: [''],
       name: [''],
+      price: [''],
       type: [''],
       releaseDate: ['']
     })
@@ -52,6 +54,7 @@ export class JobsCreateComponent implements OnInit {
       updateDate: null,
       updatedBy: null,
       active: null,
+      price: this.form.controls.price.value,
       name: this.form.controls.name.value,
       author: new UserEntity(),
       jobType: this.form.controls.type.value,
@@ -69,10 +72,10 @@ export class JobsCreateComponent implements OnInit {
           console.log('Trabalho  discografico gravado com sucesso');
           this.form.reset();
         },
-        e=>{
+        (e: HttpErrorResponse) =>{
           this.failture = true;
           this.success = false;
-          this.errorMessage = 'Erro ao gravar trabalho discografico';
+          this.errorMessage = e.error.message+"";
           console.error('Erro ao gravar trabalho discografico:',e.message);
         }
     );

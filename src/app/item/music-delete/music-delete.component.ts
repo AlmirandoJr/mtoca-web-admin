@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MusicService } from '../music.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-music-delete',
@@ -27,7 +28,11 @@ export class MusicDeleteComponent implements OnInit {
     .subscribe(x => { event.target.disabled= true;
                       this.success=true;
                       this.failture=false},
-      x => {this.failture=true });
+      (error: HttpErrorResponse)    => {this.failture=true;
+        this.success=false;
+       this.failtureFailture  = error.error.message+"";
+
+      });
   }
 
   dontConfirm() {

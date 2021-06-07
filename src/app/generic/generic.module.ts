@@ -7,6 +7,7 @@ import { GenericEntity } from './generic.entity';
 @NgModule({
   imports: [
     CommonModule
-  ]
+  ],
+  declarations: [  ]
 })
 export class GenericModule { }

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -52,10 +53,11 @@ export class ChangePasswordComponent implements OnInit {
           this.successPasswordChanged  =true;
           this.form.reset();
         },
-        error=>{
+        (error:HttpErrorResponse)=>{
           this.missMatchPasswords =false;
           this.errorUpdatingPassword = true;
           this.successPasswordChanged  =false;
+          this.errorUpdatingPasswordMessage = error.error.message+"";
         });
 
   }

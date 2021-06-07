@@ -9,6 +9,7 @@ import { UserService } from 'src/app/user/user.service';
 import { UserEntity } from 'src/app/user/user.entity';
 import { JobService } from '../job.service';
 import { JobEntity } from '../job.entity';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-music-create',
@@ -26,6 +27,8 @@ export class MusicCreateComponent implements OnInit {
   artists: UserEntity [] = [];
 
   jobs: JobEntity [] = [];
+  freeItemArrayValues: boolean [] = [false,true];
+
 
   sucess = false;
   failture = false;
@@ -36,6 +39,7 @@ export class MusicCreateComponent implements OnInit {
   genreTypes: string[]=['Afro',
     'Afro House',
     'Afro Pop',
+    'Afro Jazz',
     'Amapiano',
     'Blues',
     'Clássica / Erudita',
@@ -114,7 +118,7 @@ export class MusicCreateComponent implements OnInit {
       price: this.form.controls.price.value,
       seqNumber: this.form.controls.seqNumber.value,
       code: null,
-      isFreeItem: this.form.controls.isFreeItem.value,
+      freeItem: this.form.controls.isFreeItem.value,
 
     };
     if(music.seqNumber<1 ||music.seqNumber>50){
@@ -126,14 +130,15 @@ export class MusicCreateComponent implements OnInit {
 
     this.musicService.saveMusic(music, selectedJob.code)
         .subscribe(x => { this.sucess = true;
-                          this.sucessMessage = 'Upload da musica efectuado com sucesso!!!'; 
+                          this.sucessMessage = 'Musica criada efectuado com sucesso!!!'; 
                           this. unsupportedMusicSeqNumber = false;
                           this.form.reset();
                         },
                           
-                   e => { this.failture = true;
+                   (e : HttpErrorResponse)=> { this.failture = true;
                     this. unsupportedMusicSeqNumber = false;      
-                    this.errorMessage = 'Erro ocorrido ao fazer upload da musica!!!';
+                    this.errorMessage = e.error.message+"";
+                    ;
                          
                           console.error(e.message);
         });

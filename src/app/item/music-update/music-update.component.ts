@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ItemEntity } from '../item.entity';
 import { FormBuilder } from '@angular/forms';
 import { MusicService } from '../music.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-music-update',
@@ -16,6 +17,9 @@ export class MusicUpdateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private musicService: MusicService)  { }
 
+    freeItemArrayValues: boolean [] = [false,true];
+
+
     sucess :boolean=false;
     unsupportedMusicSeqNumber :boolean=false;
     failture :boolean=false;
@@ -25,6 +29,7 @@ export class MusicUpdateComponent implements OnInit {
     genreTypes: string[]=['Afro',
     'Afro House',
     'Afro Pop',
+    'Afro Jazz',
     'Amapiano',
     'Blues',
     'Clássica / Erudita',
@@ -61,11 +66,12 @@ export class MusicUpdateComponent implements OnInit {
     colaborators: this.data.colaborators,
     author:  this.data.job.author.name,
     seqNumber: this.data.seqNumber,
-    isFreeItem: this.data.isFreeItem
+    isFreeItem: this.data.freeItem
   
   });
 
   update(){
+
 
     const music = new  ItemEntity()
     
@@ -82,8 +88,9 @@ export class MusicUpdateComponent implements OnInit {
     music.active = this.data.active;
     music.job = this.data.job;
     music.seqNumber = this.form.controls.seqNumber.value;
-    music.isFreeItem = this.form.controls.isFreeItem.value;
+    music.freeItem = this.form.controls.isFreeItem.value;
 
+    console.log(music);
 
     if(music.seqNumber<1 || music.seqNumber>50){
       this.unsupportedMusicSeqNumber =true;
@@ -98,10 +105,13 @@ export class MusicUpdateComponent implements OnInit {
           this.unsupportedMusicSeqNumber =false;
           this.form.reset();
         }
-        ,error=>{this.failture=true;
+        ,(error: HttpErrorResponse)=>{this.failture=true;
           this.sucess=false;
+          
+          this.errorMessage = error.error.message+"";
+          
           this.unsupportedMusicSeqNumber =false;
-          console.error('error ao actualizar os dados da musica: ',error.message)
+          console.error(error.error)
         });
   }
 

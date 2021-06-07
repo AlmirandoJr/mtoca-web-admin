@@ -52,15 +52,20 @@ export class MusicService {
   
   }
   updateMusic(music:ItemEntity){
-    console.log('gratuita: '+music.isFreeItem)
+    console.log('gratuita: '+music.freeItem);
 
-    console.log('$$@@#$ :::'+music)
     return this.httpClient.put(`${this.itemsURI}`,music);
   }
 
   deleteMusic(itemCode: string){
     return this.httpClient.delete(`${this.itemsURI}/${itemCode}`);
 
+  }
+
+  getmusicByJobCode(jobCode: string) {
+
+    return this.httpClient.get(`${this.itemsURI}/jobCode/${jobCode}`)
+              .pipe(catchError(e => { throw new  Error('' + e.message); }));
   }
 
 }

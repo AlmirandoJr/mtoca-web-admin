@@ -27,12 +27,15 @@ import { MusicDeleteComponent } from './item/music-delete/music-delete.component
 import { JobsGetComponent } from './item/jobs-get/jobs-get.component';
 import { MusicGetReadOlnyComponent } from './item/music-get-read-olny/music-get-read-olny.component';
 import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
-
+import { BoughtItemsComponent } from './account-items/bought-items/bought-items.component';
+import { AccountItemsModule } from './account-items/account-items.module';
+import { YesNoPipe } from './generic/yes-no.pipe';
+import { NumbersPerItemComponent } from './account-items/numbers-per-item/numbers-per-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent,YesNoPipe
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { ResetPasswordComponent } from './security/reset-password/reset-password
     AccountModule,
     SecurityModule,
     ReactiveFormsModule,
+    AccountItemsModule,
     RouterModule.forRoot([
       {path: 'all-users', component: UserGetComponent},
       {path: 'all-accounts', component: AccountGetComponent},
@@ -58,8 +62,9 @@ import { ResetPasswordComponent } from './security/reset-password/reset-password
       {path: 'delete-music', component: MusicDeleteComponent},
       {path: 'get-jobs', component: JobsGetComponent },
       {path: 'get-music-read-only', component: MusicGetReadOlnyComponent },
-      {path: 'reset-password', component: ResetPasswordComponent}
-
+      {path: 'reset-password', component: ResetPasswordComponent},
+      {path: 'account-item-all', component: BoughtItemsComponent},
+      {path: 'nr-account-items-per-item', component: NumbersPerItemComponent}
 
 
 

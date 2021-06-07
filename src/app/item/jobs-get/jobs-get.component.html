@@ -8,8 +8,8 @@
     <br />
 
     <br />
-    <button class="btn btn-primary" type="button" (click)="openNewJobDialog()">
-        Novo trabalho
+    <button class="btn btn-light" type="button" (click)="openNewJobDialog()">
+        <img src="../../../assets/button-add.png" width="50px" height="50px"/>
      </button>
 
      <br />
@@ -22,7 +22,9 @@
                 <th scope="col">Autor</th>
                 <th scope="col">tipo</th>
                 <th scope="col">codigo</th>
-                <th scope="col">Lancado em </th> 
+                <th scope="col">Lancado em </th>
+                <th scope="col">Preco </th> 
+                <th ></th>
                 <th ></th>
                 <th ></th>
                 <th ></th>
@@ -37,26 +39,31 @@
                 <td>{{ job.jobType }}</td>
                 <td>{{ job.code  }}</td>
                 <td>{{ job.releaseDate | date  }}</td>
+                <td>{{ job.price | currency  }}</td>
+
                
                 <td>
-                    <button class="btn btn-info" type="button" (click)="openUpdateJobDialog( job )">
-                        Editar
+                    <button class="btn btn-light" type="button" (click)="openUpdateJobDialog( job )">
+                        <img src="../../../assets/button-edit.png" width="30px" height="30px"/>
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-danger" type="button" (click)="openDeleteJobDialog( job )">
-                        Remover
+                    <button class="btn btn-light" type="button" (click)="openDeleteJobDialog( job )">
+                        <img src="../../../assets/button-remove.png" width="30px" height="30px"/>
                      </button>
                 </td>
                 <td>
-                    <button class="btn btn-info" type="button" (click)="openUploadPhoto( job )">
-                        Foto
+                    <button class="btn btn-light" type="button" (click)="openUploadPhoto( job )">
+                        <img src="../../../assets/button-image-upload-icon.png" width="30px" height="30px"/>
                      </button>
+                </td>
+                <td>
+                    <button class="btn btn-light" type="button" (click)="openDetails( job )">
+                        <img src="../../../assets/button-Info.png" width="30px" height="30px"/>
+                    </button>
                 </td>
 
             </tr>
         </tbody>
     </table>
-
-
 </div>

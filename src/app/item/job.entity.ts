@@ -7,6 +7,7 @@ export class  JobEntity  extends GenericEntity{
     jobType: string;
     code: string;
     releaseDate: Date;
+    price: number;
     jobPhoto: any;
 
 }

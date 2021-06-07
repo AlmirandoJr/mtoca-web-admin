@@ -8,6 +8,7 @@ import { JobUpdateComponent } from '../job-update/job-update.component';
 import { JobEntity } from '../job.entity';
 import { JobService } from '../job.service';
 import { JobsCreateComponent } from '../jobs-create/jobs-create.component';
+import { MusicGetByJobComponent } from '../music-get-by-job/music-get-by-job.component';
 
 @Component({
   selector: 'app-jobs-get',
@@ -77,6 +78,16 @@ export class JobsGetComponent implements OnInit {
     matDialogConfig.data = job;
 
     this.matDialog.open(JobPhotoUploadComponent,matDialogConfig);
+  }
+
+  openDetails( job: JobEntity){
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.width = "1200px"
+    matDialogConfig.height = "900px";
+    matDialogConfig.data = job;
+
+    this.matDialog.open(MusicGetByJobComponent,matDialogConfig);
+
   }
 
   

@@ -1,0 +1,74 @@
+
+<br />
+
+<br />
+
+<div class="container">
+    
+    <h2> {{ title }}</h2>
+    <br />
+
+    <br />
+
+        <div class="form-group">
+            <label >Codigo da compra: </label>
+            <label><b> {{ accountItem.code }}</b></label>
+         </div>
+         <div class="form-group">
+            <label >Codigo do Comprador: </label>
+            <label><b> {{ accountItem.account.code }}</b></label>
+         </div>
+         <div class="form-group">
+            <label >Comprador: </label>
+            <label><b> {{ accountItem.account.user.username }}</b></label>
+         </div>
+         <div class="form-group">
+            <label >Codigo do item: </label>
+            <label><b> {{ accountItem.item.code }}</b></label>
+         </div>
+         <div class="form-group">
+            <label >Nome da Musica: </label>
+            <label><b> {{ accountItem.item.name }} </b></label>
+         </div>
+         <div class="form-group">
+            <label >Codigo do trabalho discografico: </label>
+            <label><b> {{ accountItem.item.job.code }}</b></label>
+         </div>
+         <div class="form-group">
+            <label >Nome do trabalho discografico: </label>
+            <label><b> {{ accountItem.item.job.name}} </b></label>
+         </div>
+         <div class="form-group">
+            <label> Comprada: </label>
+            <label> <b>{{ accountItem.bought  }} </b></label>
+         </div>
+       
+     <br />
+
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Criado em</th>
+                <th scope="col">Conversation_id</th>
+                <th scope="col">Response Code</th>
+                <th scope="col">Response Desc.</th>
+                <th scope="col">Transaction Id.</th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mpesaC2BResponseEntity of mpesaC2BResponseEntities ">
+                <td>{{ mpesaC2BResponseEntity.creationDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+                <td>{{ mpesaC2BResponseEntity.output_ConversationID }}</td>
+                <td>{{ mpesaC2BResponseEntity.output_ResponseCode }}</td>
+                <td>{{ mpesaC2BResponseEntity.output_ResponseDesc }}</td>
+                <td>{{ mpesaC2BResponseEntity.output_TransactionID  }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

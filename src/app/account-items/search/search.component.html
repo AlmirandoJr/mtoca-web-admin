@@ -1,0 +1,22 @@
+<div class="container">
+    <div class=" col-lg-6">
+        <h2> Pesquisa</h2>
+
+        <form class=""  >
+
+            <div class="form-group" >
+                <label for="artist">Artista:</label>
+                <select class="form-control" formControlName="author" id="artist"  #aa  (change)="onSelectArtist(aa.value)" required>
+                    <option  value="null"> --Selecione o Author-- </option>
+                    <option value="{{ author.username }}" *ngFor="let author of authors">{{ author.name }}</option>
+                </select>
+            </div>
+
+            <button class="btn btn-info" type="button" (click)="searchPurchases( )">
+                Pesquisar
+             </button>    
+            
+            <button type="reset" class="btn btn-light">Apagar</button>
+        </form>
+    </div>
+</div>

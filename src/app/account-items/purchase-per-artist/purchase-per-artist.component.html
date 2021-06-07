@@ -1,0 +1,42 @@
+<br />
+
+<br />
+
+<div class="container">
+    
+    <h4> {{ title }}</h4>
+    <br />
+
+    <br />
+   
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Cod. Utilizador</th>
+                <th scope="col">Cod. Item</th>
+                <th scope="col">Comprada</th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let accountItem of accountItems">
+                <td>{{ accountItem.code }}</td>
+                <td>{{ accountItem.account.code }}</td>
+                <td>{{ accountItem.item.code }}</td>
+                <td>{{ accountItem.bought   }}</td>
+               
+                <td>
+                    <button class="btn btn-info" type="button" (click)="openDetails( accountItem )">
+                        <img src="../../../assets/button-Info.png" width="30px" height="30px"/>
+                    </button>    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

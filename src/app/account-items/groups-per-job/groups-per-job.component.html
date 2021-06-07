@@ -1,0 +1,43 @@
+<br />
+
+<br />
+
+<div class="container">
+    
+    <h2> {{ title }}</h2>
+    <br />
+
+
+     <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Artista</th>
+                <th scope="col">Obra</th>
+                <th scope="col">Data Lanc.</th>
+                <th scope="col">Cod. Musica</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Nr. vendas</th>
+                <th scope="col">SubTotal</th>
+                <th ></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let groupsPerJobDTO of groupsPerJobDTOs">
+                <td>{{ groupsPerJobDTO.job.author.name }}</td>
+                <td>{{ groupsPerJobDTO.job.name }}</td>
+                <td>{{ groupsPerJobDTO.job.releaseDate | date}}</td>
+                <td>{{ groupsPerJobDTO.job.code  }}</td>
+                <td>{{ groupsPerJobDTO.job.price | currency}}</td>
+                <td>{{ groupsPerJobDTO.numberOfSales  }}</td>
+                <td>{{ groupsPerJobDTO.subTotal | currency }}</td>
+
+               
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

@@ -10,7 +10,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authenticationService.isAdminLoggedin">
-            Utilizadores
+                    Utilizadores
                  </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a  *ngIf="authenticationService.isAdminLoggedin" class="dropdown-item" routerLink="/all-users">Utilizadores</a>
@@ -20,17 +20,19 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Items
+                     Items
                  </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/get-music">Musicas Disposniveis</a>
                     <a class="dropdown-item" routerLink="/get-jobs">Trabalhos discograficos</a>
+                    <a class="dropdown-item" routerLink="/account-item-all">Musicas compradas</a>
+                    <a class="dropdown-item" routerLink="/nr-account-items-per-item">Vendas por item/job</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Conta
+                     Conta
                  </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/all-accounts">Todas</a>
@@ -40,18 +42,15 @@
         </ul>
         <div class="form-inline my-2 my-lg-0">
            
-            <a class="navbar-brand" >Utilizador: {{ authenticationService.username }}</a>
                 
             <li class="nav-item dropdown ">
-                <a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Definicoes
-                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown ">
-                    <button class="btn btn-light" (click)="changePassword()">Alterar senha</button>
-                    <button class="btn btn-light" (click)="updateUserData()">Actualizar dados</button>
-                    <button class="btn btn-light" (click)="setProfilePhoto()">Aterar Foto de Perfil</button>
-                    <button class="btn btn-light" (click)="logout()">Sair</button>
+                <a class="nav-link dropdown-toggle" id="loggedUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  <img src="../../assets/user-icon.jpg" width="50px" height="50px"/> {{ authenticationService.user.name }}</a>
 
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown ">
+                    <button class="btn btn-light dropdown-item" (click)="changePassword()">Alterar senha</button>
+                    <button class="btn btn-light dropdown-item" (click)="updateUserData()">Actualizar dados</button>
+                    <button class="btn btn-light dropdown-item" (click)="setProfilePhoto()">Aterar Foto de Perfil</button>
+                    <button class="btn btn-light dropdown-item" (click)="logout()">Sair</button>
                 </div>
             </li>
             
