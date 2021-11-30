@@ -125,8 +125,12 @@ export class AuthenticationService {
     return this.customeroggedin;
   }
 
-  resetPassword(username: string){
-    return this.http.put(`${this.usersUrl}/password-reset?username=${username}`,{});
+  resetPassword(username: string, otp: string){
+    return this.http.put(`${this.usersUrl}/password-reset?username=${username}&otp:${otp}`,{});
+  }
+
+  requestResetPassword(username: string){
+    return this.http.post(`${this.usersUrl}//password-reset-request?username=${username}`,{});
   }
 
 }

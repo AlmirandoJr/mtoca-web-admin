@@ -13,10 +13,14 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">Cod. Utilizador</th>
-                <th scope="col">Cod. Item</th>
-                <th scope="col">Comprada</th>
+                <th scope="col">Comprador</th>
+                <th scope="col">Musica</th>
+                <th scope="col">Preco</th>
+                <th scope="col">Trabalho</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data</th>
+
+
                 <th ></th>
                 
             </tr>
@@ -24,11 +28,12 @@
         <tbody>
 
             <tr *ngFor="let accountItem of accountItems">
-                <td>{{ accountItem.code }}</td>
                 <td>{{ accountItem.account.code }}</td>
-                <td>{{ accountItem.item.code }}</td>
-                <td>{{ accountItem.bought   }}</td>
-               
+                <td>{{ accountItem.item.name }}</td>
+                <td>{{ accountItem.item.price | currency}}</td>
+                <td>{{ accountItem.item.job.name }}</td>
+                <td>{{ accountItem.item.job.jobType }}</td>
+                <td>{{ accountItem.creationDate | date }}</td>
                 <td>
                     <button class="btn btn-info" type="button" (click)="openDetails( accountItem )">
                         <img src="../../../assets/button-Info.png" width="30px" height="30px"/>

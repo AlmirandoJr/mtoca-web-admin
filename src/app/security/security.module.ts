@@ -5,12 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpinterceptorService } from './httpinterceptor.service';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordComponent } from './request-reset-password/request-reset-password.component';
+import { ValidadeOtpComponent } from './validade-otp/validade-otp.component';
 
 
 
 @NgModule({
-  declarations: [LogginComponent, ResetPasswordComponent],
+  declarations: [LogginComponent, ResetPasswordComponent, ValidadeOtpComponent],
   imports: [
     CommonModule,
     BrowserModule,

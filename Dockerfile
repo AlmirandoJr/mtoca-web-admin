@@ -1,5 +1,5 @@
 #stage 1
-FROM node:latest as node
+FROM node:alpine as nodeBuilder
 WORKDIR /app
 COPY  . .
 RUN npm install
@@ -7,4 +7,6 @@ RUN npm run build --prod
 
 # stage 2
 FROM nginx:alpine
-COPY --from=node  /app/dist/mtoca-web-admin /usr/share/nginx/html
+#EXPOSE 4200
+#COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=nodeBuilder  /app/dist/mtoca-web-admin /usr/share/nginx/html

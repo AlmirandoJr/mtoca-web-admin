@@ -26,11 +26,12 @@ import { MusicUpdateComponent } from './item/music-update/music-update.component
 import { MusicDeleteComponent } from './item/music-delete/music-delete.component';
 import { JobsGetComponent } from './item/jobs-get/jobs-get.component';
 import { MusicGetReadOlnyComponent } from './item/music-get-read-olny/music-get-read-olny.component';
-import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './security/request-reset-password/request-reset-password.component';
 import { BoughtItemsComponent } from './account-items/bought-items/bought-items.component';
 import { AccountItemsModule } from './account-items/account-items.module';
 import { YesNoPipe } from './generic/yes-no.pipe';
 import { NumbersPerItemComponent } from './account-items/numbers-per-item/numbers-per-item.component';
+import { MatPaginator, MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { NumbersPerItemComponent } from './account-items/numbers-per-item/number
     SecurityModule,
     ReactiveFormsModule,
     AccountItemsModule,
+    MatTableModule,
+    MatPaginator,
     RouterModule.forRoot([
       {path: 'all-users', component: UserGetComponent},
       {path: 'all-accounts', component: AccountGetComponent},
