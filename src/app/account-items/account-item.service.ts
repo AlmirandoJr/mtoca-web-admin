@@ -32,20 +32,20 @@ export class AccountItemService {
     return this.httpClient.get<MpesaC2BResponseEntity[]>(`${this.accountItemsURI}/mpesa-tries/${code}`)
    }
 
-   getNumberOfAccountItemsPerItem(){
-     return this.httpClient.get<AccountItemPerItemDto[]>(`${this.accountItemsURI}/account-per-item`)
+   getNumberOfAccountItemsPerItem(start, end){
+     return this.httpClient.get<AccountItemPerItemDto[]>(`${this.accountItemsURI}/account-per-item?startDate=${start}&endDate=${end}`)
    }
 
-   getNumberOGroupPerJob(){
-    return this.httpClient.get<GroupsPerJobDTO[]>(`${this.accountItemsURI}/group-per-job`)
+   getNumberOGroupPerJob( start, end){
+    return this.httpClient.get<GroupsPerJobDTO[]>(`${this.accountItemsURI}/group-per-job?startDate=${start}&endDate=${end}`)
   }
 
-  getNumberOfAccountItemsPerItembyArtist(username: string){
-    return this.httpClient.get<AccountItemPerItemDto[]>(`${this.accountItemsURI}/account-per-item-by-artist/${username}`)
+  getNumberOfAccountItemsPerItembyArtist(username: string, start, end){
+    return this.httpClient.get<AccountItemPerItemDto[]>(`${this.accountItemsURI}/account-per-item-by-artist/${username}?startDate=${start}&endDate=${end}`)
   }
 
-  getNumberOGroupPerJobByArtist(username: string){
-   return this.httpClient.get<GroupsPerJobDTO[]>(`${this.accountItemsURI}/group-per-job-by-artist/${username}`)
+  getNumberOGroupPerJobByArtist(username: string,  start, end){
+   return this.httpClient.get<GroupsPerJobDTO[]>(`${this.accountItemsURI}/group-per-job-by-artist/${username}?startDate=${start}&endDate=${end}`)
  }
 
 

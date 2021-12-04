@@ -6,7 +6,15 @@ import { PurchasePerArtistComponent } from './purchase-per-artist/purchase-per-a
 import { SearchComponent } from './search/search.component';
 import { NumbersPerItemComponent } from './numbers-per-item/numbers-per-item.component';
 import { GroupsPerJobComponent } from './groups-per-job/groups-per-job.component';
-import {  MatPaginatorModule, MatTableModule, MatTabsModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule, MatOption, MatOptionModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 
@@ -14,9 +22,16 @@ import {  MatPaginatorModule, MatTableModule, MatTabsModule } from '@angular/mat
   declarations: [BoughtItemsComponent, AccountItemDetaiilsComponent, PurchasePerArtistComponent, SearchComponent, NumbersPerItemComponent, GroupsPerJobComponent],
   imports: [
     CommonModule,
-    MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule
   ]
 })
 export class AccountItemsModule { }

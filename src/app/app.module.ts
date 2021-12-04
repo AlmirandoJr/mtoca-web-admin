@@ -31,7 +31,12 @@ import { BoughtItemsComponent } from './account-items/bought-items/bought-items.
 import { AccountItemsModule } from './account-items/account-items.module';
 import { YesNoPipe } from './generic/yes-no.pipe';
 import { NumbersPerItemComponent } from './account-items/numbers-per-item/numbers-per-item.component';
-import { MatPaginator, MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { GroupsPerJobComponent } from './account-items/groups-per-job/groups-per-job.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,8 @@ import { MatPaginator, MatTableModule } from '@angular/material';
     ReactiveFormsModule,
     AccountItemsModule,
     MatTableModule,
-    MatPaginator,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forRoot([
       {path: 'all-users', component: UserGetComponent},
       {path: 'all-accounts', component: AccountGetComponent},
@@ -67,8 +73,8 @@ import { MatPaginator, MatTableModule } from '@angular/material';
       {path: 'get-music-read-only', component: MusicGetReadOlnyComponent },
       {path: 'reset-password', component: ResetPasswordComponent},
       {path: 'account-item-all', component: BoughtItemsComponent},
-      {path: 'nr-account-items-per-item', component: NumbersPerItemComponent}
-
+      {path: 'nr-account-items-per-item', component: NumbersPerItemComponent},
+      {path: 'nr-account-items-per-job', component: GroupsPerJobComponent}
 
 
     ]),
