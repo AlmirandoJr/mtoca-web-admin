@@ -45,7 +45,7 @@ export class GroupsPerJobComponent implements OnInit, AfterViewInit {
     end: new FormControl()});
   
     
-    displayedColumns: string[] = ['Obra', 'Preco', 'Nr. vendas','Sub Total'];
+    displayedColumns: string[] = ['Obra','Artista', 'Preco', 'Nr. vendas','Sub Total'];
     dataSource: MatTableDataSource<GroupsPerJobDTO>;
     groupsPerJobDTOs : GroupsPerJobDTO [];
   

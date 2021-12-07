@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ng build 
+ng build  --configuration production
 
 docker login --username  cfaife --password Codecode@1
 

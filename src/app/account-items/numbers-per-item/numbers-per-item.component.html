@@ -73,6 +73,13 @@
             <td mat-cell *matCellDef="let row"> {{row.itemEntity.job.name}} </td>
             <td mat-footer-cell *matFooterCellDef>  </td>
           </ng-container>
+
+          <!--Artista -->
+          <ng-container matColumnDef="Artista">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Artista </th>
+            <td mat-cell *matCellDef="let row"> {{row.itemEntity.job.author.name}} </td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+          </ng-container>
       
           <!-- Nr. vendas -->
           <ng-container matColumnDef="Nr. vendas">
@@ -105,5 +112,4 @@
       </div>
    
 
-    <h2>Total = {{ total| currency: 'MZN'}}</h2>
 </div>

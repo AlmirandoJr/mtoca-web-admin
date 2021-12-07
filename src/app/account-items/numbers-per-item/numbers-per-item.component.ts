@@ -46,7 +46,7 @@ export class NumbersPerItemComponent implements OnInit, AfterViewInit {
   end: new FormControl()});
 
   
-  displayedColumns: string[] = ['Musica', 'Preco', 'Obra', 'Nr. vendas','Sub Total'];
+  displayedColumns: string[] = ['Musica', 'Preco', 'Obra','Artista', 'Nr. vendas','Sub Total'];
   dataSource: MatTableDataSource<AccountItemPerItemDto>;
   accountItemPerItemDtos: AccountItemPerItemDto [];
 

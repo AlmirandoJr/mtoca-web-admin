@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  tittle = 'mtoca-web-admin';
+  title = 'mtoca-web-admin';
 }
